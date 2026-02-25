@@ -3,7 +3,7 @@
 
 <p align="center">
   <kbd>
-    <img src="./assets/images/Github_Pic.png" alt="Portfolio Preview" />
+    <img src="./src/assets/images/Github_Pic.png" alt="Portfolio Preview" />
   </kbd>
 </p> 
 
