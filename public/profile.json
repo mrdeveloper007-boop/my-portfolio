@@ -1,0 +1,12 @@
+{
+  "data": {
+    "user": {
+      "id": 1,
+      "name": "Abdul Qadeer",
+      "bio": "Full Stack Shopify Developer",
+      "avatarUrl": "https://avatars.githubusercontent.com/mrdeveloper007-boop",
+      "location": "Pakistan",
+      "isHireable": false
+    }
+  }
+}
