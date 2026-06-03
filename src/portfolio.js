@@ -23,7 +23,7 @@ const greeting = {
   username: "Abdul Qadeer",
   title: "Hi all, I'm Abdul Qadeer",
   subTitle: emoji(
-    "A Full Stack Shopify Developer 🚀 experienced in building custom Shopify stores, Liquid-based theme development, private app solutions, and advanced eCommerce features tailored to client needs."
+    "Shopify Full Stack Developer 🚀 with 3+ years building Shopify & Shopify Plus stores end-to-end — dynamic Liquid theme development on Dawn & Horizon, custom apps with Remix & Polaris, Shopify Functions, and Checkout Extensibility."
   ),
   resumeLink:
     "https://drive.google.com/uc?export=download&id=1UILznJ2ecVIazvRXywGsD6jPPfsMiAcm", // Set to empty to hide the button
@@ -37,13 +37,7 @@ const socialMediaLinks = {
   linkedin: "https://www.linkedin.com/in/qadeer-ghaffar-665430197/",
   gmail: "mr.developer38@gmail.com",
   whatsapp: "https://wa.me/923134503753",
-  // gitlab: "https://gitlab.com/saadpasta",
-  // facebook: "https://www.facebook.com/saad.pasta7",
-  // medium: "https://medium.com/@saadpasta",
-  // stackoverflow: "https://stackoverflow.com/users/10422806/saad-pasta",
-  // Instagram, Twitter and Kaggle are also supported in the links!
-  // To customize icons and social links, tweak src/components/SocialMedia
-  display: true // Set true to display this section, defaults to false
+  display: true
 };
 
 // Skills Section
@@ -51,17 +45,26 @@ const socialMediaLinks = {
 const skillsSection = {
   title: "What I do",
   subTitle:
-    "FULL STACK SHOPIFY DEVELOPER SPECIALIZING IN CUSTOM STORES, THEMES & PRIVATE APPS",
+    "FULL STACK SHOPIFY DEVELOPER — DYNAMIC THEMES, CUSTOM APPS, FUNCTIONS & CHECKOUT EXTENSIBILITY",
   skills: [
-    emoji("⚡ Build high-converting Shopify stores from scratch"),
     emoji(
-      "⚡ Custom Shopify theme development using Liquid, HTML, CSS & JavaScript"
+      "⚡ Build Shopify & Shopify Plus stores end-to-end on Dawn and the new Horizon theme"
     ),
     emoji(
-      "⚡ Develop advanced custom sections, features, and dynamic storefront UI"
+      "⚡ Develop dynamic sections, blocks & metafield/metaobject-powered features in Liquid + Web Components"
     ),
-    emoji("⚡ Create private Shopify apps tailored to client requirements"),
-    emoji("⚡ Optimize store performance, speed, and user experience")
+    emoji(
+      "⚡ Build custom Shopify apps with Remix, Polaris, App Bridge & Admin GraphQL API"
+    ),
+    emoji(
+      "⚡ Ship Shopify Functions — discount, cart-transform, delivery customization in TypeScript"
+    ),
+    emoji(
+      "⚡ Build Checkout UI Extensions & Branding API customizations on Shopify Plus"
+    ),
+    emoji(
+      "⚡ Optimize storefront performance — Lighthouse, lazy loading, WebP, code splitting"
+    )
   ],
 
   /* Make Sure to include correct Font Awesome Classname to view your icon
@@ -212,78 +215,65 @@ const workExperiences = {
   display: true, // Set it to true to show workExperiences Section
   experience: [
     {
-      role: "Shopify Developer (Enterprise Project)",
+      role: "Shopify Full Stack Developer — Dawn Custom Pages",
       company: "Fashionphile",
       companylogo: require("./assets/images/fahionphile.png"),
-      date: "2024",
-      desc: "Worked on Shopify development for a global fashion resale brand operating across 40+ stores worldwide.",
+      date: "Dec 2025 – Feb 2026",
+      desc: "Dynamic page development on Dawn for a global fashion resale brand operating across 40+ stores worldwide.",
       descBullets: [
-        "Built custom Shopify theme sections and scalable storefront components",
-        "Implemented advanced UI enhancements and performance improvements",
-        "Supported enterprise-level Shopify architecture and multi-store workflows"
+        "Built 12+ custom Dawn pages on Online Store 2.0 — reusable sections/blocks for scalable, merchant-editable content",
+        "Built the \"Is This Authentic?\" interactive game page entirely in vanilla JavaScript — event-driven progression, dynamic DOM rendering, no page reloads",
+        "Implemented section-within-section rendering via Section Rendering API for dynamic UI state swaps"
       ]
     },
 
     {
-      role: "Full Stack Shopify Developer (Multinational Brand)",
-      company: "Kiddospace",
+      role: "Shopify Full Stack Developer — International Brand",
+      company: "The Kiddospace",
       companylogo: require("./assets/images/kiddospace.png"),
-      date: "2023 – 2024",
-      desc: "Revamped Shopify storefront using Debutify theme customization, metafields, and conversion-focused enhancements.",
+      date: "Mar 2025 – Oct 2025",
+      desc: "Full storefront revamp for an international children's brand with 42+ stores worldwide; design consistency, navigation, and mobile responsiveness rebuilt from the ground up.",
       descBullets: [
-        "Developed metafield-powered dynamic sections for product discovery",
-        "Implemented upsell/cross-sell integrations and optimized store performance",
-        "Implemented product page functionality using metafields, enabling dynamic image updates based on the selected color variant."
+        "Built dynamic sections powered by metafields and metaobjects for product discovery",
+        "Translated Figma into pixel-perfect Liquid sections with advanced filtering",
+        "Lifted AOV with ReConvert / AfterSell upsells; reduced page load times with lazy loading, WebP, and code minification"
       ]
     },
 
     {
-      role: "Shopify Theme & Custom Features Developer",
-      company: "ValleyEyeWear",
-      companylogo: require("./assets/images/valleyeyewear.png"),
-      date: "2023",
-      desc: "Delivered advanced Shopify custom development including mega menus, metafield bundles, and third-party tool integrations.",
-      descBullets: [
-        "Created a pixel-perfect header and hover-based mega menu structure",
-        "Built custom product flow with lens bundle selection and dynamic pricing",
-        "Integrated virtual try-on functionality seamlessly into the storefront"
-      ]
-    },
-
-    {
-      role: "Shopify Store Developer (International Brand)",
+      role: "Shopify Full Stack Developer — Dawn From Scratch",
       company: "Scrubser",
       companylogo: require("./assets/images/scrubser.png"),
-      date: "2023",
-      desc: "Implemented and customized Shopify Dawn theme, building a scalable storefront with optimized navigation and conversion-focused sections.",
+      date: "Mar 2024 – Dec 2024",
+      desc: "Built the Dawn-based storefront from scratch — branding, layout, navigation, and core storefront architecture.",
       descBullets: [
-        "Customized homepage sections, promotional blocks, and branded UI using Shopify native architecture",
-        "Configured product options, filtering, and Quick Buy functionality for smoother shopping experience",
-        "Developed a clean store structure with minimal reliance on heavy third-party apps"
+        "Built multi-level brand-based navigation, dynamic homepage sections, and Quick Buy on collection pages",
+        "Configured product option interfaces (size, color) and Shopify-native filtering / facets — minimal third-party app dependency",
+        "Developed clean, modular section architecture with metafield-driven content blocks"
       ]
     },
 
     {
-      role: "Shopify Theme Customization Developer",
-      company: "Ammara Khan",
-      companylogo: require("./assets/images/ammarakhan.png"),
-      date: "2022 – 2023",
-      desc: "Customized and configured a premium Shopify fashion theme with structured product metafields, navigation enhancements, and responsive UI refinements.",
+      role: "Shopify Full Stack Developer — Custom Product Page Engineering",
+      company: "ValleyEyeWear",
+      companylogo: require("./assets/images/valleyeyewear.png"),
+      date: "Freelance",
+      desc: "Advanced Shopify development — custom mega menu, metafield-driven product bundles, and third-party tool integration.",
       descBullets: [
-        "Built homepage banners, featured collections, and promotional sections using Shopify Theme Customizer",
-        "Implemented metafield-driven product information blocks (fabric, sizing, delivery)",
-        "Integrated WhatsApp CTA, newsletter signup, and Shopify Search & Discovery filtering"
+        "Built pixel-perfect header and hover-triggered mega menu matched to reference design across desktop/mobile",
+        "Developed a fully custom product page using metafields for lens bundles (Non-Prescription, Single Vision, Progressive) with dynamic pricing logic",
+        "Integrated third-party virtual try-on tool with seamless UI placement on the product page"
       ]
     },
 
     {
-      role: "Shopify Developer",
+      role: "Shopify Full Stack Developer",
       company: "Lumu.pk",
       companylogo: require("./assets/images/lumu.png"),
       date: "2022 – 2023",
-      desc: "Designed and customized a modern Shopify store with responsive UI, branded sections, and performance improvements.",
+      desc: "Built a modern Shopify storefront with dynamic sections, branded UI, and performance-optimized architecture.",
       descBullets: [
-        "Built custom homepage sections and collection layouts",
+        "Built custom homepage sections and collection layouts with reusable blocks",
         "Improved store speed, UX, and mobile-first responsiveness",
         "Configured product structure, navigation, and marketing integrations"
       ]
@@ -302,34 +292,43 @@ const openSource = {
 // Some big projects you have worked on
 
 const bigProjects = {
-  title: "Shopify Apps Projects",
-  subtitle: "SHOPIFY APPS THAT I HAVE BUILT TO HELP STORE OWNERS BOOST SALES",
+  title: "Custom Shopify Apps",
+  subtitle:
+    "PRIVATE SHOPIFY APPS I'VE BUILT — SHIPPED TO LIVE CLIENT STORES (CODE CONFIDENTIAL UNDER CLIENT AGREEMENTS)",
   projects: [
     {
-      image: require("./assets/images/low-stock.png"),
-      projectName: "Low Stock Inventory Tracker (Private App)",
+      image: require("./assets/images/cartsense-app.png"),
+      projectName: "CartSense — Cart Abandonment Insight",
       projectDesc:
-        "A Shopify app that automatically tracks low stock products and notifies store owners to restock before running out of inventory (code confidential).",
+        "Turn silent abandonment into actionable insight. Injects a lightweight feedback prompt into the cart and surfaces structured drop-off reasons (price, shipping, payment) plus free-text feedback in an embedded Admin dashboard. Built on Remix, Polaris, App Bridge, Admin GraphQL API, and a theme app extension.",
       footerLink: [
         {
-          // name: "View App Details",
-          // url: "#"
+          name: "Request Demo",
+          url: "https://wa.me/923134503753?text=Hi%20Abdul%20Qadeer,%20I%20want%20a%20demo%20of%20CartSense%20App."
+        }
+      ]
+    },
+    {
+      image: require("./assets/images/low-stock.png"),
+      projectName: "Low Stock Inventory Tracker",
+      projectDesc:
+        "Never let a bestseller go out of stock. A background watcher that listens to inventory_levels/update webhooks across the whole catalog and pings the merchant the moment a SKU dips below a configurable threshold. Built on Node.js + Remix with an embedded Polaris UI.",
+      footerLink: [
+        {
           name: "Request Demo",
           url: "https://wa.me/923134503753?text=Hi,%20I%20would%20like%20a%20demo%20of%20your%20Low%20Stock%20Inventory%20Tracker%20App."
         }
       ]
     },
     {
-      image: require("./assets/images/cartsense-app.png"),
-      projectName: "CartSense App (Private App)",
+      image: require("./assets/images/shopify-app-dev.png"),
+      projectName: "CronPilot — Scheduled Store Automations",
       projectDesc:
-        "An abandoned cart feedback app that collects customer reviews and reasons for leaving products in the cart, helping merchants improve conversions (code confidential).",
+        "A cron-job runner built natively for Shopify. Lets merchants schedule recurring store operations — inventory syncs, scheduled product publishing/un-publishing, metafield refreshes, draft order creation — from a single Admin dashboard. Replaces brittle Zapier setups with a store-scoped, reliable solution. Built on Node.js, Remix, Polaris, Admin GraphQL API, and a server-side cron worker.",
       footerLink: [
         {
-          // name: "View App Details",
-          // url: "#"
           name: "Request Demo",
-          url: "https://wa.me/923134503753?text=Hi%20Abdul%20Qadeer,%20I%20want%20a%20demo%20of%20CartSense%20App."
+          url: "https://wa.me/923134503753?text=Hi%20Abdul%20Qadeer,%20I%20want%20a%20demo%20of%20CronPilot%20App."
         }
       ]
     }
@@ -399,24 +398,28 @@ const bigProjects = {
 // };
 
 const achievementSection = {
-  title: "Shopify Skills & Expertise",
-  subtitle: "TECHNOLOGIES AND SKILLS I USE TO BUILD SHOPIFY STORES AND APPS",
+  title: "Core Shopify Expertise",
+  subtitle:
+    "THE STACK I USE EVERY DAY TO SHIP DYNAMIC SHOPIFY STORES, APPS, AND PLUS-TIER FEATURES",
   achievementsCards: [
     {
-      title: "Shopify Theme Development",
-      subtitle: "Liquid, JSON templates, custom sections, Shopify OS 2.0",
+      title: "Dynamic Theme Development",
+      subtitle:
+        "Liquid · Online Store 2.0 · Dawn · Horizon · Web Components · metafields / metaobjects",
       image: require("./assets/images/shopify-theme-dev.png"),
       footerLink: []
     },
     {
-      title: "Shopify App Development",
-      subtitle: "Remix, Node.js, Polaris, GraphQL Admin API",
+      title: "Custom App Development",
+      subtitle:
+        "Remix · Polaris · App Bridge · Admin GraphQL API · OAuth · Webhooks · Shopify Functions",
       image: require("./assets/images/shopify-app-dev.png"),
       footerLink: []
     },
     {
-      title: "Store Optimization",
-      subtitle: "Speed improvements, SEO basics, conversion-focused UX",
+      title: "Performance & Checkout Extensibility",
+      subtitle:
+        "Lighthouse audits · lazy loading · WebP · Checkout UI Extensions · Branding API (Plus)",
       image: require("./assets/images/store-opt.png"),
       footerLink: []
     }
@@ -430,22 +433,9 @@ const blogSection = {
   title: "Blogs",
   subtitle:
     "With Love for Developing cool stuff, I love to write and teach others what I have learnt.",
-  displayMediumBlogs: "true", // Set true to display fetched medium blogs instead of hardcoded ones
-  blogs: [
-    {
-      url: "https://blog.usejournal.com/create-a-google-assistant-action-and-win-a-google-t-shirt-and-cloud-credits-4a8d86d76eae",
-      title: "Win a Google Assistant Tshirt and $200 in Google Cloud Credits",
-      description:
-        "Do you want to win $200 and Google Assistant Tshirt by creating a Google Assistant Action in less then 30 min?"
-    },
-    {
-      url: "https://medium.com/@saadpasta/why-react-is-the-best-5a97563f423e",
-      title: "Why REACT is The Best?",
-      description:
-        "React is a JavaScript library for building User Interface. It is maintained by Facebook and a community of individual developers and companies."
-    }
-  ],
-  display: false // Set false to hide this section, defaults to true
+  displayMediumBlogs: "false",
+  blogs: [],
+  display: false
 };
 
 // Talks Sections
@@ -474,11 +464,8 @@ const podcastSection = {
   title: emoji("Podcast 🎙️"),
   subtitle: "I LOVE TO TALK ABOUT MYSELF AND TECHNOLOGY",
 
-  // Please Provide with Your Podcast embeded Link
-  podcast: [
-    "https://anchor.fm/codevcast/embed/episodes/DevStory---Saad-Pasta-from-Karachi--Pakistan-e9givv/a-a15itvo"
-  ],
-  display: false // Set false to hide this section, defaults to true
+  podcast: [],
+  display: false
 };
 
 // Resume Section
@@ -501,8 +488,8 @@ const contactInfo = {
 // Twitter Section
 
 const twitterDetails = {
-  userName: "twitter", //Replace "twitter" with your twitter username without @
-  display: true // Set true to display this section, defaults to false
+  userName: "",
+  display: false
 };
 
 const isHireable = true; // Set false if you are not looking for a job. Also isHireable will be display as Open for opportunities: Yes/No in the GitHub footer
