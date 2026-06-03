@@ -33,7 +33,7 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
 /* ==================================================================
    Shell
    ================================================================== */
-.aq-app {
+.aq-shell {
   width: 100%;
   min-height: 100vh;
   background: $bg;
@@ -44,7 +44,7 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Faint global vignette so the page never feels flat */
-.aq-app::before {
+.aq-shell::before {
   content: '';
   position: fixed;
   inset: 0;
