@@ -397,20 +397,33 @@ function CodeWindow() {
 }
 
 /* ==================================================================
-   Trust strip — clients (animated marquee)
+   Trust strip — clients (animated marquee, clickable logos)
    ================================================================== */
 function TrustStrip() {
   const ref = useReveal();
+  // Duplicate the list once so the marquee loops seamlessly.
   const row = [...clients, ...clients];
   return (
     <section className="aq-trust aq-reveal" ref={ref}>
       <p className="aq-trust-label">
         Trusted by brands &amp; agencies worldwide
       </p>
-      <div className="aq-trust-marquee" aria-hidden="true">
+      <div className="aq-trust-marquee">
         <ul className="aq-trust-row">
           {row.map((c, i) => (
-            <li key={c + i}>{c}</li>
+            <li key={c.name + i}>
+              <a
+                href={c.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="aq-client-logo"
+                aria-label={"Visit " + c.name}
+                title={"Visit " + c.name}
+              >
+                <img src={c.logo} alt={c.name} loading="lazy" />
+                <span>{c.name}</span>
+              </a>
+            </li>
           ))}
         </ul>
       </div>
@@ -549,6 +562,18 @@ function Experience() {
                   <li key={j}>{b}</li>
                 ))}
               </ul>
+              {e.url && (
+                <a
+                  className="aq-timeline-link"
+                  href={e.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fas fa-store" />
+                  Visit store
+                  <i className="fas fa-external-link-alt" />
+                </a>
+              )}
             </div>
           </li>
         ))}
@@ -611,10 +636,30 @@ function Education() {
       <div className="aq-grid aq-grid-2 aq-grid-equal">
         {education.map((ed) => (
           <article className="aq-card aq-edu" key={ed.school}>
-            <div className="aq-edu-meta">{ed.date}</div>
-            <h3>{ed.school}</h3>
+            <div className="aq-edu-head">
+              {ed.logo && (
+                <div className="aq-edu-logo">
+                  <img src={ed.logo} alt={ed.short || ed.school} loading="lazy" />
+                </div>
+              )}
+              <div className="aq-edu-headtext">
+                <div className="aq-edu-meta">{ed.date}</div>
+                <h3>{ed.school}</h3>
+              </div>
+            </div>
             <p className="aq-edu-degree">{ed.degree}</p>
             <p className="aq-edu-note">{ed.note}</p>
+            {ed.url && (
+              <a
+                className="aq-edu-link"
+                href={ed.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Visit website
+                <i className="fas fa-external-link-alt" />
+              </a>
+            )}
           </article>
         ))}
       </div>

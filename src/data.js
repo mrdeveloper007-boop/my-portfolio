@@ -3,6 +3,15 @@
 // Single source of truth for every section.
 // ============================================
 
+// Webpack bundles these so we get hashed URLs in production.
+import fashionphileLogo from "./assets/images/fahionphile.png";
+import kiddospaceLogo from "./assets/images/kiddospace.png";
+import scrubserLogo from "./assets/images/scrubser.png";
+import valleyEyewearLogo from "./assets/images/valleyeyewear.png";
+import lumuLogo from "./assets/images/lumu.png";
+import uetLogo from "./assets/images/uetlogo.png";
+import gcuLogo from "./assets/images/gculogo.png";
+
 export const profile = {
   name: "Abdul Qadeer",
   shortName: "AQ",
@@ -32,11 +41,11 @@ export const hero = {
 };
 
 export const clients = [
-  "Fashionphile",
-  "The Kiddospace",
-  "Scrubser",
-  "Valley Eyewear",
-  "Lumu"
+  {name: "Fashionphile",  logo: fashionphileLogo,  url: "https://www.fashionphile.com/"},
+  {name: "The Kiddospace", logo: kiddospaceLogo,   url: "https://thekiddospacestore.com/"},
+  {name: "Scrubser",       logo: scrubserLogo,     url: "https://scrubser-shop.com/"},
+  {name: "Valley Eyewear", logo: valleyEyewearLogo, url: "https://valleyeyewear.com/"},
+  {name: "Lumu",           logo: lumuLogo,         url: "https://lumu.pk/"}
 ];
 
 export const services = [
@@ -108,6 +117,7 @@ export const experience = [
     company: "Fashionphile",
     location: "Global · Fashion Resale",
     date: "Dec 2025 – Feb 2026",
+    url: "https://www.fashionphile.com/",
     bullets: [
       "Built 12+ custom Dawn pages on Online Store 2.0 — reusable sections and blocks",
       "Shipped “Is This Authentic?” interactive game in vanilla JS — event-driven, dynamic DOM",
@@ -119,6 +129,7 @@ export const experience = [
     company: "The Kiddospace",
     location: "42+ stores worldwide",
     date: "Mar 2025 – Oct 2025",
+    url: "https://thekiddospacestore.com/",
     bullets: [
       "Full storefront revamp powered by metafields and metaobjects",
       "Pixel-perfect Figma → Liquid translation with advanced filtering",
@@ -130,6 +141,7 @@ export const experience = [
     company: "Scrubser",
     location: "Premium scrubs brand",
     date: "Mar 2024 – Dec 2024",
+    url: "https://scrubser-shop.com/",
     bullets: [
       "Built the Dawn-based storefront from scratch — branding, layout, navigation, architecture",
       "Multi-level brand-based navigation + dynamic homepage sections",
@@ -141,6 +153,7 @@ export const experience = [
     company: "Valley Eyewear",
     location: "Premium eyewear · Australia",
     date: "Freelance",
+    url: "https://valleyeyewear.com/",
     bullets: [
       "Pixel-perfect header + hover-triggered mega menu across desktop and mobile",
       "Custom product page with metafield lens bundles + dynamic pricing logic",
@@ -152,6 +165,7 @@ export const experience = [
     company: "Lumu.pk",
     location: "Lifestyle brand",
     date: "2022 – 2023",
+    url: "https://lumu.pk/",
     bullets: [
       "Custom homepage sections and collection layouts with reusable blocks",
       "Improved store speed, UX and mobile-first responsiveness",
@@ -222,15 +236,21 @@ export const stack = [
 export const education = [
   {
     school: "University of Engineering and Technology (UET), Lahore",
+    short: "UET Lahore",
     degree: "BS Computer Science",
     date: "2019 – 2023",
+    logo: uetLogo,
+    url: "https://www.uet.edu.pk/",
     note:
       "Focus on web development, eCommerce architecture and software engineering."
   },
   {
     school: "Government College University (GCU), Lahore",
+    short: "GCU Lahore",
     degree: "Intermediate · Pre-Engineering",
     date: "2016 – 2018",
+    logo: gcuLogo,
+    url: "https://gcu.edu.pk/",
     note: "Early exposure to programming and web technologies."
   }
 ];
