@@ -8,7 +8,7 @@ A modern, responsive portfolio built with **React** to showcase my Shopify devel
 
 ## Live Website
 
-**[my-portfolio-teal-tau-98.vercel.app](https://my-portfolio-teal-tau-98.vercel.app/)**
+**[my-portfolio-shopify.vercel.app](https://my-portfolio-shopify.vercel.app/)**
 
 ---
 
@@ -75,8 +75,8 @@ Create a `.env` from `env.example` and add your GitHub token (used to fetch prof
 
 - **Email** — [mr.developer38@gmail.com](mailto:mr.developer38@gmail.com)
 - **WhatsApp** — [+92 313 4503753](https://wa.me/923134503753)
-- **LinkedIn** — [linkedin.com/in/qadeer-ghaffar-665430197](https://www.linkedin.com/in/qadeer-ghaffar-665430197)
-- **Portfolio** — [my-portfolio-teal-tau-98.vercel.app](https://my-portfolio-teal-tau-98.vercel.app/)
+- **LinkedIn** — [Abdul Qadeer](https://www.linkedin.com/in/qadeer-ghaffar-665430197)
+- **Portfolio** — [my-portfolio-shopify.vercel.app](https://my-portfolio-shopify.vercel.app/)
 
 ---
 
