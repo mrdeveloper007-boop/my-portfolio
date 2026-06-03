@@ -1,4 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import "./App.scss";
 import {
   profile,
@@ -13,12 +19,131 @@ import {
   nav
 } from "./data";
 
-/* ------------------------------------------------------------------ */
-/* Header — sticky, condenses on scroll                                */
-/* ------------------------------------------------------------------ */
+/* ==================================================================
+   Hooks
+   ================================================================== */
+
+// Reveal-on-scroll — adds `is-in` to the element when it enters viewport.
+function useReveal(options = {}) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          node.classList.add("is-in");
+          io.disconnect();
+        }
+      },
+      {threshold: 0.12, rootMargin: "0px 0px -60px 0px", ...options}
+    );
+    io.observe(node);
+    return () => io.disconnect();
+  }, []);
+  return ref;
+}
+
+// Active section based on scroll position — drives nav highlight.
+function useActiveSection(ids) {
+  const [active, setActive] = useState(ids[0]);
+  useEffect(() => {
+    const onScroll = () => {
+      const offset = window.innerHeight * 0.35;
+      let current = ids[0];
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top - offset <= 0) current = id;
+      }
+      setActive(current);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, {passive: true});
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [ids]);
+  return active;
+}
+
+// Scroll progress 0..1
+function useScrollProgress() {
+  const [p, setP] = useState(0);
+  useEffect(() => {
+    const onScroll = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      setP(max > 0 ? Math.min(1, h.scrollTop / max) : 0);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, {passive: true});
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return p;
+}
+
+// Count-up animation, runs once when element enters view.
+function useCountUp(target, duration = 1400) {
+  const [value, setValue] = useState(0);
+  const ref = useRef(null);
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        const start = performance.now();
+        const tick = (now) => {
+          const t = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - t, 3);
+          setValue(Math.round(eased * target));
+          if (t < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      },
+      {threshold: 0.4}
+    );
+    io.observe(node);
+    return () => io.disconnect();
+  }, [target, duration]);
+  return [ref, value];
+}
+
+// Spotlight cursor — sets --mx/--my on the element so CSS can paint a
+// soft radial glow that follows the mouse. Cheap and gorgeous.
+function useSpotlight() {
+  const onMove = useCallback((e) => {
+    const el = e.currentTarget;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", ((e.clientX - r.left) / r.width) * 100 + "%");
+    el.style.setProperty("--my", ((e.clientY - r.top) / r.height) * 100 + "%");
+  }, []);
+  return onMove;
+}
+
+/* ==================================================================
+   Top scroll-progress bar
+   ================================================================== */
+function ScrollBar() {
+  const p = useScrollProgress();
+  return (
+    <div className="aq-progress" aria-hidden="true">
+      <span style={{transform: `scaleX(${p})`}} />
+    </div>
+  );
+}
+
+/* ==================================================================
+   Header — sticky + active link + mobile menu
+   ================================================================== */
 function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const navIds = useMemo(
+    () => nav.map((n) => n.href.replace("#", "")),
+    []
+  );
+  const active = useActiveSection(navIds);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -26,6 +151,13 @@ function Header() {
     window.addEventListener("scroll", onScroll, {passive: true});
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
     <header className={"aq-header" + (scrolled ? " is-scrolled" : "")}>
@@ -39,20 +171,24 @@ function Header() {
         </a>
 
         <nav className={"aq-nav" + (open ? " is-open" : "")}>
-          {nav.map(item => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-            >
-              {item.label}
-            </a>
-          ))}
+          {nav.map((item) => {
+            const id = item.href.replace("#", "");
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className={active === id ? "is-active" : ""}
+              >
+                {item.label}
+              </a>
+            );
+          })}
           <a
             className="aq-nav-cta"
             href={profile.whatsapp}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             onClick={() => setOpen(false)}
           >
             Hire me
@@ -63,7 +199,7 @@ function Header() {
           className={"aq-burger" + (open ? " is-open" : "")}
           aria-label="Toggle menu"
           aria-expanded={open}
-          onClick={() => setOpen(v => !v)}
+          onClick={() => setOpen((v) => !v)}
         >
           <span />
           <span />
@@ -74,15 +210,29 @@ function Header() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Hero                                                                */
-/* ------------------------------------------------------------------ */
+/* ==================================================================
+   Hero
+   ================================================================== */
 function Hero() {
+  const inner = useRef(null);
+
+  // Subtle parallax: orb follows the cursor a few pixels.
+  const onPointer = (e) => {
+    const node = inner.current;
+    if (!node) return;
+    const r = node.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    node.style.setProperty("--px", x * 18 + "px");
+    node.style.setProperty("--py", y * 18 + "px");
+  };
+
   return (
-    <section className="aq-hero" id="top">
+    <section className="aq-hero" id="top" onMouseMove={onPointer} ref={inner}>
       <div className="aq-hero-bg" aria-hidden="true">
         <div className="aq-hero-orb" />
         <div className="aq-hero-grid" />
+        <div className="aq-hero-noise" />
       </div>
 
       <div className="aq-hero-inner">
@@ -99,7 +249,8 @@ function Hero() {
         </p>
 
         <h1 className="aq-hero-title">
-          Hi, I&rsquo;m <span className="aq-name">{profile.name}</span>.<br />
+          Hi, I&rsquo;m <span className="aq-name">{profile.name}</span>.
+          <br />
           I build Shopify stores that{" "}
           <span className="aq-accent">ship revenue</span>.
         </h1>
@@ -110,7 +261,7 @@ function Hero() {
           <a
             href={profile.whatsapp}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="aq-btn aq-btn-primary"
           >
             <i className="fab fa-whatsapp" />
@@ -119,20 +270,24 @@ function Hero() {
           <a
             href={profile.resumeUrl}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="aq-btn aq-btn-ghost"
           >
             <i className="fas fa-file-download" />
             Download CV
           </a>
+          <a
+            href={"mailto:" + profile.email}
+            className="aq-btn aq-btn-text"
+          >
+            <i className="fas fa-envelope" />
+            {profile.email}
+          </a>
         </div>
 
         <ul className="aq-hero-metrics">
-          {hero.metrics.map(m => (
-            <li key={m.label}>
-              <span className="aq-metric-value">{m.value}</span>
-              <span className="aq-metric-label">{m.label}</span>
-            </li>
+          {hero.metrics.map((m) => (
+            <HeroMetric key={m.label} value={m.value} label={m.label} />
           ))}
         </ul>
       </div>
@@ -142,9 +297,26 @@ function Hero() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Code window — premium visual instead of a stock illustration        */
-/* ------------------------------------------------------------------ */
+function HeroMetric({value, label}) {
+  // Parse leading integer for animation; keep suffix like "+" untouched.
+  const match = String(value).match(/^(\d+)(.*)$/);
+  const target = match ? parseInt(match[1], 10) : 0;
+  const suffix = match ? match[2] : "";
+  const [ref, n] = useCountUp(target);
+  return (
+    <li ref={ref}>
+      <span className="aq-metric-value">
+        {n}
+        <span className="aq-metric-suffix">{suffix}</span>
+      </span>
+      <span className="aq-metric-label">{label}</span>
+    </li>
+  );
+}
+
+/* ==================================================================
+   Code window — premium visual
+   ================================================================== */
 function CodeWindow() {
   return (
     <aside className="aq-code-window" aria-hidden="true">
@@ -197,7 +369,10 @@ function CodeWindow() {
             <span className="str">"15.0"</span> {"} }"}
           </span>
           <span className="ln">9</span>
-          <span>{"    "}{"}"}));</span>
+          <span>
+            {"    "}
+            {"}"}));
+          </span>
           <span className="ln">10</span>
           <span />
           <span className="ln">11</span>
@@ -221,51 +396,65 @@ function CodeWindow() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Trust strip — clients                                               */
-/* ------------------------------------------------------------------ */
+/* ==================================================================
+   Trust strip — clients (animated marquee)
+   ================================================================== */
 function TrustStrip() {
+  const ref = useReveal();
+  const row = [...clients, ...clients];
   return (
-    <section className="aq-trust">
+    <section className="aq-trust aq-reveal" ref={ref}>
       <p className="aq-trust-label">
         Trusted by brands &amp; agencies worldwide
       </p>
-      <ul className="aq-trust-row">
-        {clients.map(c => (
-          <li key={c}>{c}</li>
-        ))}
-      </ul>
+      <div className="aq-trust-marquee" aria-hidden="true">
+        <ul className="aq-trust-row">
+          {row.map((c, i) => (
+            <li key={c + i}>{c}</li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Section heading helper                                              */
-/* ------------------------------------------------------------------ */
-function SectionHead({eyebrow, title, sub}) {
+/* ==================================================================
+   Section heading helper
+   ================================================================== */
+function SectionHead({number, eyebrow, title, sub}) {
   return (
     <header className="aq-sec-head">
-      <span className="aq-sec-eyebrow">{eyebrow}</span>
+      <div className="aq-sec-eyebrow-row">
+        {number && <span className="aq-sec-num">{number}</span>}
+        <span className="aq-sec-eyebrow">{eyebrow}</span>
+      </div>
       <h2 className="aq-sec-title">{title}</h2>
       {sub && <p className="aq-sec-sub">{sub}</p>}
     </header>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Services                                                            */
-/* ------------------------------------------------------------------ */
+/* ==================================================================
+   Services
+   ================================================================== */
 function Services() {
+  const ref = useReveal();
+  const spot = useSpotlight();
   return (
-    <section className="aq-section" id="services">
+    <section className="aq-section aq-reveal" id="services" ref={ref}>
       <SectionHead
+        number="01"
         eyebrow="What I do"
-        title="End-to-end engineering, not just patches"
+        title="End-to-end engineering, not just patches."
         sub="From a single dynamic section to a Shopify Plus app with checkout extensions — I own the build top to bottom."
       />
-      <div className="aq-grid aq-grid-3">
-        {services.map(s => (
-          <article className="aq-card aq-service" key={s.title}>
+      <div className="aq-grid aq-grid-3 aq-grid-equal">
+        {services.map((s) => (
+          <article
+            className="aq-card aq-service aq-spot"
+            key={s.title}
+            onMouseMove={spot}
+          >
             <span className="aq-service-icon">
               <i className={s.icon} />
             </span>
@@ -278,23 +467,27 @@ function Services() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Featured apps                                                       */
-/* ------------------------------------------------------------------ */
+/* ==================================================================
+   Featured apps
+   ================================================================== */
 function Work() {
+  const ref = useReveal();
+  const spot = useSpotlight();
   return (
-    <section className="aq-section" id="work">
+    <section className="aq-section aq-reveal" id="work" ref={ref}>
       <SectionHead
+        number="02"
         eyebrow="Selected work"
-        title="Private Shopify apps shipped to live stores"
-        sub="Code confidential under client NDAs — request a live demo and I’ll walk you through the Admin."
+        title="Private Shopify apps shipped to live stores."
+        sub="Code confidential under client NDAs — message me on WhatsApp for a live demo and I’ll walk you through the Admin."
       />
-      <div className="aq-grid aq-grid-3">
-        {apps.map(a => (
+      <div className="aq-grid aq-grid-3 aq-grid-equal">
+        {apps.map((a) => (
           <article
-            className="aq-card aq-app"
+            className="aq-card aq-app aq-spot"
             key={a.name}
             style={{"--accent": a.accent}}
+            onMouseMove={spot}
           >
             <div className="aq-app-head">
               <span className="aq-app-icon">
@@ -307,7 +500,7 @@ function Work() {
             </div>
             <p className="aq-app-desc">{a.desc}</p>
             <ul className="aq-chip-row">
-              {a.stack.map(s => (
+              {a.stack.map((s) => (
                 <li key={s}>{s}</li>
               ))}
             </ul>
@@ -315,7 +508,7 @@ function Work() {
               className="aq-app-cta"
               href={a.cta}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               Request demo
               <i className="fas fa-arrow-right" />
@@ -327,20 +520,22 @@ function Work() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Experience                                                          */
-/* ------------------------------------------------------------------ */
+/* ==================================================================
+   Experience timeline
+   ================================================================== */
 function Experience() {
+  const ref = useReveal();
   return (
-    <section className="aq-section" id="experience">
+    <section className="aq-section aq-reveal" id="experience" ref={ref}>
       <SectionHead
+        number="03"
         eyebrow="Experience"
-        title="3+ years shipping real revenue for real brands"
+        title="3+ years shipping real revenue for real brands."
         sub="A short tour of the client work I’m proudest of."
       />
       <ol className="aq-timeline">
         {experience.map((e, i) => (
-          <li className="aq-timeline-item" key={i}>
+          <li className="aq-timeline-item" key={i} style={{"--i": i}}>
             <div className="aq-timeline-dot" />
             <div className="aq-timeline-meta">
               <span className="aq-timeline-date">{e.date}</span>
@@ -362,20 +557,27 @@ function Experience() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Tech stack                                                          */
-/* ------------------------------------------------------------------ */
+/* ==================================================================
+   Tech stack
+   ================================================================== */
 function Stack() {
+  const ref = useReveal();
+  const spot = useSpotlight();
   return (
-    <section className="aq-section" id="stack">
+    <section className="aq-section aq-reveal" id="stack" ref={ref}>
       <SectionHead
+        number="04"
         eyebrow="My toolkit"
-        title="The stack I reach for every day"
+        title="The stack I reach for every day."
         sub="From pixel to production — themes, apps, APIs and the DevOps that ties it all together."
       />
-      <div className="aq-grid aq-grid-4">
-        {stack.map(col => (
-          <article className="aq-card aq-stack-col" key={col.label}>
+      <div className="aq-grid aq-grid-4 aq-grid-equal">
+        {stack.map((col) => (
+          <article
+            className="aq-card aq-stack-col aq-spot"
+            key={col.label}
+            onMouseMove={spot}
+          >
             <div className="aq-stack-head">
               <span className="aq-stack-icon">
                 <i className={col.icon} />
@@ -383,7 +585,7 @@ function Stack() {
               <h3>{col.label}</h3>
             </div>
             <ul>
-              {col.items.map(it => (
+              {col.items.map((it) => (
                 <li key={it}>{it}</li>
               ))}
             </ul>
@@ -394,15 +596,20 @@ function Stack() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Education — compact strip                                           */
-/* ------------------------------------------------------------------ */
+/* ==================================================================
+   Education
+   ================================================================== */
 function Education() {
+  const ref = useReveal();
   return (
-    <section className="aq-section aq-section-tight" id="education">
-      <SectionHead eyebrow="Education" title="Where I trained" />
-      <div className="aq-grid aq-grid-2">
-        {education.map(ed => (
+    <section
+      className="aq-section aq-section-tight aq-reveal"
+      id="education"
+      ref={ref}
+    >
+      <SectionHead number="05" eyebrow="Education" title="Where I trained." />
+      <div className="aq-grid aq-grid-2 aq-grid-equal">
+        {education.map((ed) => (
           <article className="aq-card aq-edu" key={ed.school}>
             <div className="aq-edu-meta">{ed.date}</div>
             <h3>{ed.school}</h3>
@@ -415,16 +622,18 @@ function Education() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* FAQ                                                                 */
-/* ------------------------------------------------------------------ */
+/* ==================================================================
+   FAQ
+   ================================================================== */
 function Faq() {
+  const ref = useReveal();
   const [open, setOpen] = useState(0);
   return (
-    <section className="aq-section" id="faq">
+    <section className="aq-section aq-reveal" id="faq" ref={ref}>
       <SectionHead
+        number="06"
         eyebrow="FAQ"
-        title="Common questions before we kick off"
+        title="Common questions before we kick off."
       />
       <ul className="aq-faq">
         {faqs.map((f, i) => {
@@ -453,12 +662,13 @@ function Faq() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Contact CTA                                                         */
-/* ------------------------------------------------------------------ */
+/* ==================================================================
+   Contact CTA
+   ================================================================== */
 function Contact() {
+  const ref = useReveal();
   return (
-    <section className="aq-section" id="contact">
+    <section className="aq-section aq-reveal" id="contact" ref={ref}>
       <div className="aq-contact-card">
         <span className="aq-pill aq-pill-status">
           <span className="aq-pill-dot" />
@@ -477,7 +687,7 @@ function Contact() {
             className="aq-contact-channel"
             href={profile.whatsapp}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <span className="aq-contact-icon" style={{background: "#25d366"}}>
               <i className="fab fa-whatsapp" />
@@ -486,6 +696,7 @@ function Contact() {
               <span className="aq-contact-label">WhatsApp</span>
               <span className="aq-contact-value">{profile.phone}</span>
             </div>
+            <i className="fas fa-external-link-alt aq-contact-go" />
           </a>
           <a
             className="aq-contact-channel"
@@ -498,12 +709,13 @@ function Contact() {
               <span className="aq-contact-label">Email</span>
               <span className="aq-contact-value">{profile.email}</span>
             </div>
+            <i className="fas fa-external-link-alt aq-contact-go" />
           </a>
           <a
             className="aq-contact-channel"
             href={profile.linkedin}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <span className="aq-contact-icon" style={{background: "#0a66c2"}}>
               <i className="fab fa-linkedin-in" />
@@ -512,12 +724,13 @@ function Contact() {
               <span className="aq-contact-label">LinkedIn</span>
               <span className="aq-contact-value">qadeer-ghaffar</span>
             </div>
+            <i className="fas fa-external-link-alt aq-contact-go" />
           </a>
           <a
             className="aq-contact-channel"
             href={profile.github}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <span className="aq-contact-icon" style={{background: "#1f2937"}}>
               <i className="fab fa-github" />
@@ -526,6 +739,7 @@ function Contact() {
               <span className="aq-contact-label">GitHub</span>
               <span className="aq-contact-value">mrdeveloper007-boop</span>
             </div>
+            <i className="fas fa-external-link-alt aq-contact-go" />
           </a>
         </div>
       </div>
@@ -533,47 +747,51 @@ function Contact() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Footer                                                              */
-/* ------------------------------------------------------------------ */
+/* ==================================================================
+   Footer
+   ================================================================== */
 function Footer() {
   return (
     <footer className="aq-footer">
       <div className="aq-footer-inner">
-        <span>
-          © {new Date().getFullYear()} {profile.name} · Built and designed in
-          Lahore
-        </span>
-        <span className="aq-footer-right">
-          <a href={profile.github} target="_blank" rel="noreferrer">
+        <div className="aq-footer-mark">
+          <span className="aq-mark-badge sm">{profile.shortName}</span>
+          <span>
+            © {new Date().getFullYear()} {profile.name} · Designed and built
+            in Lahore
+          </span>
+        </div>
+        <div className="aq-footer-right">
+          <a href={profile.github} target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
-          <a href={profile.linkedin} target="_blank" rel="noreferrer">
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
             LinkedIn
           </a>
-          <a href={profile.whatsapp} target="_blank" rel="noreferrer">
+          <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer">
             WhatsApp
           </a>
-        </span>
+          <a href={"mailto:" + profile.email}>Email</a>
+        </div>
       </div>
     </footer>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Scroll-to-top                                                       */
-/* ------------------------------------------------------------------ */
+/* ==================================================================
+   Scroll-to-top FAB
+   ================================================================== */
 function ScrollTop() {
   const [show, setShow] = useState(false);
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 600);
+    onScroll();
     window.addEventListener("scroll", onScroll, {passive: true});
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  if (!show) return null;
   return (
     <button
-      className="aq-scroll-top"
+      className={"aq-scroll-top" + (show ? " is-on" : "")}
       onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
       aria-label="Scroll to top"
     >
@@ -582,12 +800,13 @@ function ScrollTop() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* App                                                                 */
-/* ------------------------------------------------------------------ */
+/* ==================================================================
+   App
+   ================================================================== */
 export default function App() {
   return (
     <div className="aq-app">
+      <ScrollBar />
       <Header />
       <main>
         <Hero />
