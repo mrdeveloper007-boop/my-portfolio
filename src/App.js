@@ -839,8 +839,9 @@ function ScrollTop() {
       className={"aq-scroll-top" + (show ? " is-on" : "")}
       onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
       aria-label="Scroll to top"
+      title="Back to top"
     >
-      <i className="fas fa-arrow-up" />
+      <i className="fas fa-hand-point-up" />
     </button>
   );
 }
