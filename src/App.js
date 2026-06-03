@@ -494,7 +494,7 @@ function Work() {
         title="Private Shopify apps shipped to live stores."
         sub="Code confidential under client NDAs — message me on WhatsApp for a live demo and I’ll walk you through the Admin."
       />
-      <div className="aq-grid aq-grid-3 aq-grid-equal">
+      <div className="aq-grid aq-grid-3">
         {apps.map((a) => (
           <article
             className="aq-card aq-app aq-spot"
