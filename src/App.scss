@@ -5,6 +5,10 @@
    ============================================ */
 
 html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
   font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
@@ -13,8 +17,20 @@ html, body, #root {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   color: $textColor;
-  background: $lightBackground1;
   scroll-behavior: smooth;
+}
+
+body {
+  /* Dark is the default theme — body bg matches so we never see
+     a flash/strip of light bg on mobile or during route changes. */
+  background: $darkBackground;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -37,6 +53,7 @@ a {
 .App {
   text-align: center;
   width: 100%;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
@@ -66,10 +83,19 @@ a {
 .dark-mode {
   background: $darkBackground;
   color: $textColorDark;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
 
   h1, h2, h3, h4, h5, h6 {
     color: $textColorDark;
   }
+}
+
+/* When a user toggles to light mode, body bg should follow.
+   The wrapper without .dark-mode means light theme is active. */
+body:has(#root > div:not(.dark-mode)) {
+  background: $lightBackground1;
 }
 
 section, .main {
