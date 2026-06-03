@@ -1,226 +1,1243 @@
-@import "./globalColor";
+/* ==================================================================
+   Abdul Qadeer — Portfolio styles
+   Single-theme, premium dark editorial. All section CSS lives here.
+   ================================================================== */
 
-/* ============================================
-   Global premium typography
-   ============================================ */
+/* ---- Tokens ---- */
+$bg:            #0b0f17;
+$bg-elev:       #11182b;
+$bg-elev-2:     #161f36;
+$border:        rgba(255, 255, 255, 0.08);
+$border-strong: rgba(255, 255, 255, 0.14);
+$ink:           #f8fafc;
+$ink-dim:       rgba(248, 250, 252, 0.72);
+$ink-mute:      rgba(248, 250, 252, 0.55);
+$accent:        #10b981;
+$accent-dark:   #059669;
+$accent-soft:   rgba(16, 185, 129, 0.14);
 
-html, body, #root {
-  margin: 0;
-  padding: 0;
+$radius-sm: 10px;
+$radius:    16px;
+$radius-lg: 22px;
+
+$display-font: 'Space Grotesk', 'Manrope', system-ui, sans-serif;
+$body-font:    'Manrope', system-ui, -apple-system, sans-serif;
+$mono-font:    'JetBrains Mono', 'Fira Code', ui-monospace, Menlo, Consolas, monospace;
+
+$shell-max: 1180px;
+$shell-pad: clamp(1rem, 3vw, 2rem);
+
+/* ---- App shell ---- */
+.aq-app {
   width: 100%;
-  min-height: 100%;
-  font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.55;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  color: $textColor;
-  scroll-behavior: smooth;
-}
-
-body {
-  /* Dark is the default theme — body bg matches so we never see
-     a flash/strip of light bg on mobile or during route changes. */
-  background: $darkBackground;
-  overflow-x: hidden;
-}
-
-#root {
   min-height: 100vh;
-  width: 100%;
+  background: $bg;
+  color: $ink;
+  position: relative;
+  isolation: isolate;
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Space Grotesk', 'Manrope', system-ui, sans-serif;
+h1, h2, h3, h4 {
+  font-family: $display-font;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: $titleColor;
+  color: $ink;
+  margin: 0;
 }
 
-a {
-  color: $brandPrimary;
-  text-decoration: none;
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: $brandPrimaryDark;
-  }
+p {
+  margin: 0;
+  color: $ink-dim;
+  line-height: 1.65;
 }
 
-.App {
-  text-align: center;
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.aq-accent {
+  color: $accent;
+}
+
+.aq-name {
+  background: linear-gradient(135deg, $accent 0%, #34d399 70%, $accent 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ==================================================================
+   Header
+   ================================================================== */
+.aq-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
   width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
+  background: rgba(11, 15, 23, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s ease, border-color 0.3s ease, padding 0.3s ease;
 }
 
-.App-logo {
-  height: 40vmin;
+.aq-header.is-scrolled {
+  background: rgba(11, 15, 23, 0.85);
+  border-bottom-color: $border;
 }
 
-.App-header {
-  background-color: $appHeaderBG;
-  min-height: 100vh;
+.aq-header-inner {
+  width: 100%;
+  max-width: $shell-max;
+  margin: 0 auto;
+  padding: 0.85rem $shell-pad;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.aq-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: $display-font;
+  font-weight: 700;
+}
+
+.aq-mark-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, $accent 0%, $accent-dark 100%);
+  color: #fff;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+}
+
+.aq-mark-name {
+  font-size: 1rem;
+  color: $ink;
+  letter-spacing: -0.01em;
+}
+
+.aq-mark-dot {
+  color: $accent;
+}
+
+.aq-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.aq-nav a {
+  padding: 0.55rem 0.95rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: $ink-dim;
+  border-radius: 8px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.aq-nav a:hover {
+  color: $ink;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.aq-nav-cta {
+  margin-left: 0.5rem;
+  padding: 0.55rem 1.1rem !important;
+  background: linear-gradient(135deg, $accent 0%, $accent-dark 100%);
+  color: #fff !important;
+  font-weight: 600 !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+}
+
+.aq-nav-cta:hover {
+  background: linear-gradient(135deg, $accent-dark 0%, $accent 100%) !important;
+  transform: translateY(-1px);
+}
+
+.aq-burger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.aq-burger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: $ink;
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.aq-burger.is-open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.aq-burger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.aq-burger.is-open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ==================================================================
+   Hero
+   ================================================================== */
+.aq-hero {
+  position: relative;
+  width: 100%;
+  max-width: $shell-max;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 4rem) $shell-pad clamp(2rem, 5vw, 3rem);
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.aq-hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.aq-hero-orb {
+  position: absolute;
+  top: -160px;
+  right: -120px;
+  width: 540px;
+  height: 540px;
+  background: radial-gradient(
+    circle,
+    rgba(16, 185, 129, 0.28) 0%,
+    rgba(16, 185, 129, 0.04) 55%,
+    transparent 75%
+  );
+  filter: blur(40px);
+}
+
+.aq-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at top, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at top, #000 30%, transparent 75%);
+}
+
+.aq-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.aq-hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.aq-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: $ink-dim;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid $border;
+  border-radius: 999px;
+}
+
+.aq-pill-status {
+  background: $accent-soft;
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #6ee7b7;
+  font-weight: 600;
+}
+
+.aq-pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: $accent;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.18);
+  animation: aq-pulse 2s infinite;
+}
+
+@keyframes aq-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.18); }
+  50%      { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);    }
+}
+
+.aq-eyebrow {
+  font-family: $display-font;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: $accent;
+  margin: 0 0 0.85rem;
+}
+
+.aq-hero-title {
+  font-family: $display-font;
+  font-size: clamp(2.25rem, 5vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  margin: 0 0 1.1rem;
+}
+
+.aq-hero-sub {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: $ink-dim;
+  max-width: 540px;
+  margin: 0 0 1.75rem;
+}
+
+.aq-hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.aq-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.4rem;
+  font-family: $display-font;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.aq-btn-primary {
+  background: linear-gradient(135deg, $accent 0%, $accent-dark 100%);
+  color: #fff;
+  box-shadow: 0 10px 28px rgba(16, 185, 129, 0.35);
+}
+
+.aq-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(16, 185, 129, 0.45);
+}
+
+.aq-btn-ghost {
+  background: rgba(255, 255, 255, 0.04);
+  color: $ink;
+  border-color: $border;
+}
+
+.aq-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: $border-strong;
+  transform: translateY(-2px);
+}
+
+.aq-hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid $border;
+}
+
+.aq-hero-metrics li {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(0.625rem + 2vmin);
-  color: $textColorDark;
+  gap: 0.15rem;
 }
 
-.App-link {
-  color: $appLink;
+.aq-metric-value {
+  font-family: $display-font;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: $ink;
+  letter-spacing: -0.02em;
 }
 
-.subTitle {
-  color: $subTitle;
+.aq-metric-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $ink-mute;
 }
 
-.dark-mode {
-  background: $darkBackground;
-  color: $textColorDark;
+/* ==================================================================
+   Code window (hero visual)
+   ================================================================== */
+.aq-code-window {
   width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
-
-  h1, h2, h3, h4, h5, h6 {
-    color: $textColorDark;
-  }
+  max-width: 560px;
+  justify-self: end;
+  background: #08101e;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 30px 70px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(16, 185, 129, 0.1);
+  overflow: hidden;
+  font-family: $mono-font;
+  animation: aq-float 9s ease-in-out infinite;
 }
 
-/* When a user toggles to light mode, body bg should follow.
-   The wrapper without .dark-mode means light theme is active. */
-body:has(#root > div:not(.dark-mode)) {
-  background: $lightBackground1;
+@keyframes aq-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
 }
 
-section, .main {
-  scroll-margin-top: 90px;
+.aq-code-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 14px;
+  background: linear-gradient(180deg, #11192c 0%, #0c1322 100%);
+  border-bottom: 1px solid $border;
+  position: relative;
 }
 
-/* ============================================
-   UNIFIED SECTION CONTAINER WIDTH
-   All sections — including legacy template sections —
-   are constrained to the same 1200px max-width so the
-   layout reads as one consistent column on big screens.
-   ============================================ */
-.main,
-.experience-container,
-.education-section,
-.skillProgress-container,
-.contact-margin {
-  width: 90% !important;
-  max-width: 1200px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
-  box-sizing: border-box;
+.aq-code-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
 }
 
-/* Consistent vertical rhythm between sections */
-.main,
-.experience-container,
-.education-section {
-  margin-top: 4rem !important;
-  margin-bottom: 0 !important;
+.aq-code-dot.r { background: #ff5f57; }
+.aq-code-dot.y { background: #febc2e; }
+.aq-code-dot.g { background: #28c840; }
+
+.aq-code-file {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: $body-font;
+  font-size: 12px;
+  font-weight: 500;
+  color: $ink-mute;
 }
 
-/* ============================================
-   UNIFIED SECTION HEADINGS
-   Template's legacy heading classes were 56px / weight 400.
-   Force them all to match our modern editorial heading style.
-   ============================================ */
-.skills-heading,
-.experience-heading,
-.achievement-heading,
-.education-heading {
-  font-family: 'Space Grotesk', 'Manrope', sans-serif !important;
-  font-size: 2.5rem !important;
-  font-weight: 700 !important;
-  line-height: 1.1 !important;
-  letter-spacing: -0.03em !important;
-  color: $titleColor !important;
-  margin: 0 0 1.5rem 0 !important;
-  text-align: left;
+.aq-code-body {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  margin: 0;
+  padding: 16px 18px 16px 0;
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: #d5dde8;
+  background: linear-gradient(180deg, #08101e 0%, #070d18 100%);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
-.dark-mode .skills-heading,
-.dark-mode .experience-heading,
-.dark-mode .achievement-heading,
-.dark-mode .education-heading {
-  color: $textColorDark !important;
+.aq-code-body code {
+  display: contents;
+  font-family: inherit;
 }
 
-@media (max-width: 768px) {
-  .skills-heading,
-  .experience-heading,
-  .achievement-heading,
-  .education-heading {
-    font-size: 1.85rem !important;
-    text-align: center !important;
-  }
+.aq-code-body .ln {
+  text-align: right;
+  padding-right: 12px;
+  color: rgba(148, 163, 184, 0.45);
+  user-select: none;
 }
 
-/* ============================================
-   Reusable utility classes
-   ============================================ */
-.lift-on-hover {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+.aq-code-body .kw  { color: #f472b6; }
+.aq-code-body .fn  { color: #60a5fa; }
+.aq-code-body .id  { color: #e2e8f0; }
+.aq-code-body .ty  { color: #34d399; }
+.aq-code-body .str { color: #fde68a; }
+.aq-code-body .num { color: #fb923c; }
 
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px $lightBoxShadowDark;
-  }
+.aq-code-foot {
+  display: flex;
+  gap: 0.5rem;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, #070d18 0%, #08101e 100%);
+  border-top: 1px solid $border;
 }
 
-.status-pill {
+.aq-tag {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  font-size: 13px;
+  gap: 0.35rem;
+  padding: 4px 10px;
+  font-family: $body-font;
+  font-size: 11px;
   font-weight: 600;
   border-radius: 999px;
-  background: $brandPrimaryLight;
-  color: $brandPrimaryDark;
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: $accent-soft;
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.28);
+}
 
-  &::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: $brandPrimary;
-    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
-    animation: pulse 2s infinite;
+.aq-tag.muted {
+  background: rgba(148, 163, 184, 0.1);
+  color: #94a3b8;
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+/* ==================================================================
+   Trust strip
+   ================================================================== */
+.aq-trust {
+  width: 100%;
+  max-width: $shell-max;
+  margin: 1rem auto 2rem;
+  padding: 1.5rem $shell-pad;
+  border-top: 1px solid $border;
+  border-bottom: 1px solid $border;
+}
+
+.aq-trust-label {
+  text-align: center;
+  font-family: $display-font;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: $ink-mute;
+  margin: 0 0 1rem;
+}
+
+.aq-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(1.25rem, 4vw, 3rem);
+}
+
+.aq-trust-row li {
+  font-family: $display-font;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: rgba(248, 250, 252, 0.5);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.aq-trust-row li:hover {
+  color: $ink;
+  transform: translateY(-2px);
+}
+
+/* ==================================================================
+   Generic section
+   ================================================================== */
+.aq-section {
+  width: 100%;
+  max-width: $shell-max;
+  margin: clamp(3rem, 6vw, 4.5rem) auto 0;
+  padding: 0 $shell-pad;
+}
+
+.aq-section-tight {
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.aq-sec-head {
+  max-width: 720px;
+  margin: 0 0 2rem;
+}
+
+.aq-sec-eyebrow {
+  display: inline-block;
+  font-family: $display-font;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: $accent;
+  margin-bottom: 0.6rem;
+}
+
+.aq-sec-title {
+  font-family: $display-font;
+  font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.65rem;
+}
+
+.aq-sec-sub {
+  font-size: 1rem;
+  color: $ink-dim;
+  max-width: 640px;
+}
+
+/* ==================================================================
+   Card primitive
+   ================================================================== */
+.aq-grid {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.aq-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.aq-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.aq-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+.aq-card {
+  background: $bg-elev;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: 1.5rem;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  min-width: 0;
+}
+
+.aq-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(16, 185, 129, 0.4);
+  background: $bg-elev-2;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ==================================================================
+   Services
+   ================================================================== */
+.aq-service h3 {
+  font-size: 1.1rem;
+  margin: 0.9rem 0 0.5rem;
+  color: $ink;
+}
+
+.aq-service p {
+  font-size: 0.92rem;
+  color: $ink-dim;
+}
+
+.aq-service-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, $accent 0%, $accent-dark 100%);
+  color: #fff;
+  font-size: 1.1rem;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.32);
+}
+
+/* ==================================================================
+   Work / apps
+   ================================================================== */
+.aq-app {
+  --accent: #{$accent};
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.aq-app::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 70%, var(--accent) 100%);
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.aq-app-head {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.aq-app-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent);
+  font-size: 1.2rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  flex-shrink: 0;
+}
+
+.aq-app h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: $ink;
+  line-height: 1.2;
+}
+
+.aq-app-sub {
+  font-size: 0.8rem;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $ink-mute;
+}
+
+.aq-app-desc {
+  font-size: 0.92rem;
+  color: $ink-dim;
+}
+
+.aq-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.aq-chip-row li {
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.3rem 0.55rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid $border;
+  color: $ink-dim;
+}
+
+.aq-app-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: auto;
+  font-family: $display-font;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.aq-app-cta:hover {
+  gap: 0.7rem;
+  color: $ink;
+}
+
+/* ==================================================================
+   Experience timeline
+   ================================================================== */
+.aq-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-left: 0;
+}
+
+.aq-timeline::before {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, $accent, transparent);
+  opacity: 0.3;
+}
+
+.aq-timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1.5rem;
+  padding-left: 36px;
+}
+
+.aq-timeline-dot {
+  position: absolute;
+  left: 1px;
+  top: 8px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: $bg;
+  border: 2px solid $accent;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+}
+
+.aq-timeline-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 4px;
+}
+
+.aq-timeline-date {
+  font-family: $display-font;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: $ink;
+}
+
+.aq-timeline-loc {
+  font-size: 0.78rem;
+  color: $ink-mute;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.aq-timeline-body {
+  background: $bg-elev;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: 1.25rem 1.4rem;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.aq-timeline-body:hover {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: $bg-elev-2;
+}
+
+.aq-timeline-body h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.2rem;
+}
+
+.aq-timeline-company {
+  font-size: 0.88rem;
+  color: $accent;
+  margin: 0 0 0.6rem;
+  font-weight: 600;
+}
+
+.aq-timeline-body ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.aq-timeline-body ul li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+  color: $ink-dim;
+}
+
+.aq-timeline-body ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $accent;
+  opacity: 0.7;
+}
+
+/* ==================================================================
+   Stack
+   ================================================================== */
+.aq-stack-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.aq-stack-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.aq-stack-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, $accent 0%, $accent-dark 100%);
+  color: #fff;
+  font-size: 1rem;
+  box-shadow: 0 5px 14px rgba(16, 185, 129, 0.3);
+}
+
+.aq-stack-col h3 {
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.aq-stack-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.aq-stack-col ul li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: 0.88rem;
+  color: $ink-dim;
+}
+
+.aq-stack-col ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: $accent;
+  opacity: 0.65;
+}
+
+/* ==================================================================
+   Education
+   ================================================================== */
+.aq-edu-meta {
+  font-family: $display-font;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: $accent;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.7rem;
+}
+
+.aq-edu h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.35rem;
+}
+
+.aq-edu-degree {
+  font-size: 0.9rem;
+  color: $ink;
+  margin: 0 0 0.5rem;
+}
+
+.aq-edu-note {
+  font-size: 0.88rem;
+  color: $ink-dim;
+}
+
+/* ==================================================================
+   FAQ
+   ================================================================== */
+.aq-faq {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  max-width: 880px;
+}
+
+.aq-faq-item {
+  background: $bg-elev;
+  border: 1px solid $border;
+  border-radius: $radius;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.aq-faq-item.is-open {
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.aq-faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.4rem;
+  border: 0;
+  background: transparent;
+  color: $ink;
+  font-family: $display-font;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.aq-faq-q:hover { color: $accent; }
+
+.aq-faq-q i {
+  font-size: 0.8rem;
+  color: $accent;
+  transition: transform 0.25s ease;
+}
+
+.aq-faq-item.is-open .aq-faq-q i {
+  transform: rotate(180deg);
+}
+
+.aq-faq-a-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.aq-faq-item.is-open .aq-faq-a-wrap {
+  grid-template-rows: 1fr;
+}
+
+.aq-faq-a {
+  overflow: hidden;
+  margin: 0;
+  padding: 0 1.4rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: $ink-dim;
+}
+
+.aq-faq-item.is-open .aq-faq-a {
+  padding: 0 1.4rem 1.1rem;
+}
+
+/* ==================================================================
+   Contact
+   ================================================================== */
+.aq-contact-card {
+  position: relative;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.25rem, 3vw, 2.5rem);
+  background:
+    radial-gradient(circle at top left, rgba(16, 185, 129, 0.16) 0%, transparent 55%),
+    $bg-elev;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: $radius-lg;
+  overflow: hidden;
+}
+
+.aq-contact-card h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  line-height: 1.15;
+  margin: 0.9rem 0 0.8rem;
+  max-width: 720px;
+}
+
+.aq-contact-card > p {
+  max-width: 600px;
+  margin-bottom: 1.75rem;
+  color: $ink-dim;
+}
+
+.aq-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+}
+
+.aq-contact-channel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $border;
+  border-radius: $radius;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.aq-contact-channel:hover {
+  transform: translateY(-2px);
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.aq-contact-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.aq-contact-channel > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.aq-contact-label {
+  font-family: $display-font;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $ink-mute;
+}
+
+.aq-contact-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: $ink;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ==================================================================
+   Footer
+   ================================================================== */
+.aq-footer {
+  width: 100%;
+  margin-top: clamp(3rem, 6vw, 5rem);
+  border-top: 1px solid $border;
+}
+
+.aq-footer-inner {
+  width: 100%;
+  max-width: $shell-max;
+  margin: 0 auto;
+  padding: 1.5rem $shell-pad;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: $ink-mute;
+}
+
+.aq-footer-right {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.aq-footer-right a {
+  transition: color 0.2s ease;
+}
+
+.aq-footer-right a:hover {
+  color: $ink;
+}
+
+/* ==================================================================
+   Scroll-to-top
+   ================================================================== */
+.aq-scroll-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, $accent 0%, $accent-dark 100%);
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(16, 185, 129, 0.45);
+  z-index: 60;
+  transition: transform 0.2s ease;
+}
+
+.aq-scroll-top:hover {
+  transform: translateY(-3px);
+}
+
+/* ==================================================================
+   Responsive
+   ================================================================== */
+@media (max-width: 980px) {
+  .aq-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .aq-code-window {
+    justify-self: stretch;
+    max-width: 100%;
+  }
+
+  .aq-grid-3,
+  .aq-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .aq-timeline-item {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 }
 
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2); }
-  50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-}
+@media (max-width: 720px) {
+  .aq-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.25rem;
+    padding: 0.75rem $shell-pad 1rem;
+    background: rgba(11, 15, 23, 0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid $border;
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
 
-.location-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  font-size: 13px;
-  font-weight: 500;
-  border-radius: 999px;
-  background: $brandSubtle;
-  color: $subTitle;
-  border: 1px solid $lightBorder1;
-}
+  .aq-nav.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
 
-.dark-mode .location-chip {
-  background: rgba(255, 255, 255, 0.06);
-  color: $textColorDark;
-  border-color: rgba(255, 255, 255, 0.1);
+  .aq-nav a {
+    padding: 0.7rem 1rem;
+  }
+
+  .aq-nav-cta {
+    margin: 0.5rem 0 0;
+    text-align: center;
+  }
+
+  .aq-burger {
+    display: flex;
+  }
+
+  .aq-hero-metrics {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .aq-metric-value { font-size: 1.4rem; }
+
+  .aq-grid-2,
+  .aq-grid-3,
+  .aq-grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .aq-contact-grid {
+    grid-template-columns: 1fr;
+  }
 }
