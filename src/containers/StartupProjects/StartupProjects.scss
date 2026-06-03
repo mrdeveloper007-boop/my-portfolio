@@ -1,90 +1,154 @@
 @import "../../_globalColor";
 
-.card-image {
-  max-width: 100%;
-  height: auto;
-  width: 250px;
-}
-.card-title {
-  color: $titleColor;
-  font-size: 22px;
-  line-height: 24px;
-  font-weight: 700;
-  margin: 15px 0 0 0;
-}
-.card-subtitle {
-  color: $cardSubtitle;
-  font-size: 17px;
-  line-height: 1.5rem;
-}
-.project-card {
-  display: flex;
-  flex-direction: column;
-  background-color: $lightBackground2;
-  padding: 1.5rem;
-  border-radius: 10px;
-  border: 1px solid $lightBorder1;
-  justify-content: center;
-}
-.project-card-light {
-  box-shadow: $lightBoxShadowDark 0px 10px 30px -15px;
-  -webkit-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
+/* ===========================
+   Apps section — responsive premium cards
+   =========================== */
 
-.project-card-dark {
-  box-shadow: 0px 10px 30px -15px $darkBoxShadow;
-  -webkit-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.25s ease;
-}
-
-.project-detail {
-  text-align: center;
-}
-.project-card-light:hover {
-  box-shadow: $lightBoxShadowDark 0px 20px 30px -10px;
-}
-.project-card-dark:hover {
-  box-shadow: 0px 20px 30px -10px $darkBoxShadow;
-}
 .project-image {
   position: relative;
-  height: 250px;
+  width: 100%;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 12px;
+  background: $brandSubtle;
+}
+
+.project-card-dark .project-image {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  color: $titleColor;
+  font-size: 1.25rem;
+  line-height: 1.35;
+  font-weight: 700;
+  margin: 1.25rem 0 0.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  letter-spacing: -0.01em;
+}
+
+.dark-mode.card-title {
+  color: $textColorDark;
+}
+
+.card-subtitle {
+  color: $cardSubtitle;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 1rem;
+}
+
+.dark-mode.card-subtitle {
+  color: rgba(248, 250, 252, 0.7);
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background: $lightBackground2;
+  padding: 1.25rem;
+  border-radius: 16px;
+  border: 1px solid $lightBorder1;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  min-width: 0; /* prevents grid blowout */
+}
+
+.project-card-light {
+  box-shadow: 0 1px 2px $lightBoxShadow;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px $lightBoxShadowDark;
+    border-color: rgba(16, 185, 129, 0.4);
+  }
+}
+
+.project-card-dark {
+  background: $darkBackgroundElevated;
+  border-color: rgba(255, 255, 255, 0.08);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    border-color: rgba(16, 185, 129, 0.45);
+  }
+}
+
+.project-detail {
+  text-align: left;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .projects-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.project-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: auto;
 }
 
 .project-card-footer span.project-tag {
-  background: $buttonColor;
-  color: $lightBackground3;
-  vertical-align: middle;
-  align-items: center;
-  border-radius: 4px;
   display: inline-flex;
-  font-size: 0.75rem;
-  height: 2em;
+  align-items: center;
+  background: $brandPrimary;
+  color: #fff;
+  vertical-align: middle;
+  border-radius: 8px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.825rem;
+  font-weight: 600;
+  height: 2.25em;
   justify-content: center;
   white-space: nowrap;
-  line-height: 1.5;
   margin: 0 0.5rem 0.5rem 0;
-  padding: 0 0.75em;
+  padding: 0 1em;
   cursor: pointer;
-  transition: 0.2s ease-in;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: $brandPrimaryDark;
+    transform: translateY(-1px);
+  }
+}
+
+.project-subtitle {
+  font-size: 1rem;
 }
 
 @media (max-width: 768px) {
   .project-subtitle {
-    font-size: 16px;
+    font-size: 0.95rem;
     text-align: center;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+
+  .card-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .projects-container {
+    grid-template-columns: 1fr;
   }
 }

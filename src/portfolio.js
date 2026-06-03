@@ -1,155 +1,116 @@
-/* Change this file to get your personal Portfolio */
-
-// To change portfolio colors globally go to the  _globalColor.scss file
+/* ============================================
+   Abdul Qadeer — Shopify Full Stack Developer
+   Portfolio configuration
+   Edit this file to update site content.
+   Colors live in src/_globalColor.scss
+   ============================================ */
 
 import emoji from "react-easy-emoji";
-import splashAnimation from "./assets/lottie/splashAnimation"; // Rename to your file name for custom animation
+import splashAnimation from "./assets/lottie/splashAnimation";
 
-// Splash Screen
-
+// ---- Splash screen ----
 const splashScreen = {
-  enabled: true, // set false to disable splash screen
+  enabled: true,
   animation: splashAnimation,
-  duration: 2000 // Set animation duration as per your animation
+  duration: 1800
 };
 
-// Summary And Greeting Section
-
+// ---- Hero illustration ----
 const illustration = {
-  animated: true // Set to false to use static SVG
+  animated: true
 };
 
+// ---- Greeting / Hero ----
 const greeting = {
   username: "Abdul Qadeer",
-  title: "Hi all, I'm Abdul Qadeer",
+  title: "Hi, I'm Abdul Qadeer",
+  tagline: "Full Stack Developer · Shopify Plus Specialist",
   subTitle: emoji(
-    "A Full Stack Shopify Developer 🚀 experienced in building custom Shopify stores, Liquid-based theme development, private app solutions, and advanced eCommerce features tailored to client needs."
+    "I build modern web apps end-to-end — from production-grade Shopify & Shopify Plus stores to custom React/Node applications, GraphQL APIs, and cloud-deployed backends. 3+ years shipping real products for real revenue."
   ),
   resumeLink:
-    "https://drive.google.com/uc?export=download&id=1UILznJ2ecVIazvRXywGsD6jPPfsMiAcm", // Set to empty to hide the button
-  displayGreeting: true // Set false to hide this section, defaults to true
+    "https://drive.google.com/uc?export=download&id=1UILznJ2ecVIazvRXywGsD6jPPfsMiAcm",
+  displayGreeting: true,
+  badges: {
+    status: "Available for new projects",
+    location: "Lahore, Pakistan · Working globally"
+  }
 };
 
-// Social Media Links
-
+// ---- Social Media ----
 const socialMediaLinks = {
   github: "https://github.com/mrdeveloper007-boop",
   linkedin: "https://www.linkedin.com/in/qadeer-ghaffar-665430197/",
   gmail: "mr.developer38@gmail.com",
   whatsapp: "https://wa.me/923134503753",
-  // gitlab: "https://gitlab.com/saadpasta",
-  // facebook: "https://www.facebook.com/saad.pasta7",
-  // medium: "https://medium.com/@saadpasta",
-  // stackoverflow: "https://stackoverflow.com/users/10422806/saad-pasta",
-  // Instagram, Twitter and Kaggle are also supported in the links!
-  // To customize icons and social links, tweak src/components/SocialMedia
-  display: true // Set true to display this section, defaults to false
+  display: true
 };
 
-// Skills Section
+// ---- Stats strip (NEW) — trust signals ----
+const statsStrip = {
+  display: true,
+  stats: [
+    {label: "Years building Shopify", value: 3, suffix: "+"},
+    {label: "Private apps shipped", value: 3, suffix: ""},
+    {label: "Client stores delivered", value: 100, suffix: "+"},
+    {label: "Average Lighthouse score", value: 90, suffix: "+"}
+  ]
+};
 
+// ---- Client logos marquee (NEW) — scrolling row ----
+const clientLogosMarquee = {
+  display: true,
+  title: "Trusted by brands & agencies",
+  clients: [
+    {name: "Fashionphile", logo: require("./assets/images/fahionphile.png"), url: "https://www.fashionphile.com/"},
+    {name: "The Kiddospace", logo: require("./assets/images/kiddospace.png"), url: "https://thekiddospacestore.com/"},
+    {name: "Scrubser", logo: require("./assets/images/scrubser.png"), url: "https://scrubser-shop.com/"},
+    {name: "Valley Eyewear", logo: require("./assets/images/valleyeyewear.png"), url: "https://valleyeyewear.com/"},
+    {name: "Lumu", logo: require("./assets/images/lumu.png"), url: "#"}
+  ]
+};
+
+// ---- Skills section ("What I do") ----
 const skillsSection = {
   title: "What I do",
   subTitle:
-    "FULL STACK SHOPIFY DEVELOPER SPECIALIZING IN CUSTOM STORES, THEMES & PRIVATE APPS",
+    "FULL STACK SHOPIFY DEVELOPER — DYNAMIC THEMES, CUSTOM APPS, FUNCTIONS & CHECKOUT EXTENSIBILITY",
   skills: [
-    emoji("⚡ Build high-converting Shopify stores from scratch"),
     emoji(
-      "⚡ Custom Shopify theme development using Liquid, HTML, CSS & JavaScript"
+      "⚡ Build Shopify & Shopify Plus stores end-to-end on Dawn and the new Horizon theme"
     ),
     emoji(
-      "⚡ Develop advanced custom sections, features, and dynamic storefront UI"
+      "⚡ Develop dynamic sections, blocks & metafield/metaobject-powered features"
     ),
-    emoji("⚡ Create private Shopify apps tailored to client requirements"),
-    emoji("⚡ Optimize store performance, speed, and user experience")
+    emoji(
+      "⚡ Build custom Shopify apps with Remix, Polaris, App Bridge & Admin GraphQL API"
+    ),
+    emoji(
+      "⚡ Ship Shopify Functions in TypeScript — discount, cart-transform, delivery"
+    ),
+    emoji(
+      "⚡ Build Checkout UI Extensions & Branding API on Shopify Plus"
+    )
   ],
-
-  /* Make Sure to include correct Font Awesome Classname to view your icon
-https://fontawesome.com/icons?d=gallery */
 
   softwareSkills: [
-    {
-      skillName: "html-5",
-      fontAwesomeClassname: "fab fa-html5"
-    },
-    {
-      skillName: "css5",
-      fontAwesomeClassname: "fab fa-css3-alt"
-    },
-    {
-      skillName: "Tailwind",
-      fontAwesomeClassname: "fas fa-wind"
-    },
-    {
-      skillName: "JavaScript",
-      fontAwesomeClassname: "fab fa-js"
-    },
-    {
-      skillName: "Shopify",
-      fontAwesomeClassname: "fab fa-shopify"
-    },
-    {
-      skillName: "Liquid",
-      fontAwesomeClassname: "fas fa-code"
-    },
-    {
-      skillName: "Theme Dev",
-      fontAwesomeClassname: "fas fa-paint-brush"
-    },
-    {
-      skillName: "Speed",
-      fontAwesomeClassname: "fas fa-tachometer-alt"
-    },
-    {
-      skillName: "Checkout",
-      fontAwesomeClassname: "fas fa-credit-card"
-    },
-    {
-      skillName: "Nodejs",
-      fontAwesomeClassname: "fab fa-node"
-    },
-    {
-      skillName: "npm",
-      fontAwesomeClassname: "fab fa-npm"
-    },
-    {
-      skillName: "Github",
-      fontAwesomeClassname: "fab fa-github"
-    },
-    {
-      skillName: "REST APIs",
-      fontAwesomeClassname: "fas fa-plug"
-    },
-    {
-      skillName: "Integrations",
-      fontAwesomeClassname: "fas fa-project-diagram"
-    }
-    // {
-    //   skillName: "sql-database",
-    //   fontAwesomeClassname: "fas fa-database"
-    // },
-    // {
-    //   skillName: "aws",
-    //   fontAwesomeClassname: "fab fa-aws"
-    // },
-    // {
-    //   skillName: "firebase",
-    //   fontAwesomeClassname: "fas fa-fire"
-    // },
-    // {
-    //   skillName: "python",
-    //   fontAwesomeClassname: "fab fa-python"
-    // },
-    // {
-    //   skillName: "docker",
-    //   fontAwesomeClassname: "fab fa-docker"
-    // }
+    {skillName: "Shopify", fontAwesomeClassname: "fab fa-shopify"},
+    {skillName: "Liquid", fontAwesomeClassname: "fas fa-code"},
+    {skillName: "JavaScript", fontAwesomeClassname: "fab fa-js"},
+    {skillName: "TypeScript", fontAwesomeClassname: "fas fa-file-code"},
+    {skillName: "React", fontAwesomeClassname: "fab fa-react"},
+    {skillName: "Node.js", fontAwesomeClassname: "fab fa-node"},
+    {skillName: "GraphQL", fontAwesomeClassname: "fas fa-project-diagram"},
+    {skillName: "HTML5", fontAwesomeClassname: "fab fa-html5"},
+    {skillName: "CSS3", fontAwesomeClassname: "fab fa-css3-alt"},
+    {skillName: "Tailwind", fontAwesomeClassname: "fas fa-wind"},
+    {skillName: "Git", fontAwesomeClassname: "fab fa-git-alt"},
+    {skillName: "Figma", fontAwesomeClassname: "fab fa-figma"}
   ],
-  display: true // Set false to hide this section, defaults to true
+  display: true
 };
 
-// Education Section
-
+// ---- Education ----
 const educationInfo = {
   display: true,
   schools: [
@@ -158,10 +119,10 @@ const educationInfo = {
       logo: require("./assets/images/uetlogo.png"),
       subHeader: "Bachelor of Science in Computer Science (BSCS)",
       duration: "2019 - 2023",
-      desc: "Completed my BS in Computer Science with a strong focus on web development, eCommerce solutions, and software engineering.",
+      desc: "Strong focus on web development, eCommerce architecture, and software engineering.",
       descBullets: [
-        "Worked on multiple web-based development projects during my degree",
-        "Developed skills in Shopify, JavaScript, and modern web technologies"
+        "Multiple web-based development projects",
+        "Foundation in algorithms, data structures, and modern web tech"
       ]
     },
     {
@@ -169,121 +130,183 @@ const educationInfo = {
       logo: require("./assets/images/gculogo.png"),
       subHeader: "Intermediate (Pre-Engineering)",
       duration: "2016 - 2018",
-      desc: "Completed college education and built my foundation in computer science and programming.",
-      descBullets: [
-        "Developed interest in web technologies and software development"
+      desc: "Pre-engineering foundation with early exposure to programming.",
+      descBullets: ["Built early interest in web technologies"]
+    }
+  ]
+};
+
+// ---- Tech proficiency (legacy progress bars — hidden) ----
+const techStack = {
+  viewSkillBars: false,
+  experience: [],
+  displayCodersrank: false
+};
+
+// ---- Full Stack tech grid (NEW) — replaces dated progress bars ----
+const techStackGrid = {
+  display: true,
+  title: "My Full Stack Toolkit",
+  subtitle: "The technologies I reach for every day — from pixel to production",
+  columns: [
+    {
+      label: "Frontend",
+      icon: "fas fa-paint-brush",
+      stack: [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "SCSS",
+        "Web Components",
+        "Vite",
+        "Figma to Code"
+      ]
+    },
+    {
+      label: "Backend",
+      icon: "fas fa-server",
+      stack: [
+        "Node.js",
+        "Remix",
+        "Express",
+        "REST APIs",
+        "GraphQL",
+        "WebSockets",
+        "OAuth / JWT",
+        "Webhooks"
+      ]
+    },
+    {
+      label: "Shopify",
+      icon: "fab fa-shopify",
+      stack: [
+        "Liquid",
+        "Online Store 2.0",
+        "Dawn & Horizon",
+        "Shopify Functions",
+        "Checkout Extensibility",
+        "Polaris · App Bridge",
+        "Admin GraphQL API",
+        "Storefront API"
+      ]
+    },
+    {
+      label: "DevOps & Tools",
+      icon: "fas fa-cogs",
+      stack: [
+        "Git · GitHub",
+        "GitHub Actions",
+        "Vercel",
+        "Docker",
+        "npm · pnpm",
+        "ESLint · Prettier",
+        "Lighthouse",
+        "Postman"
       ]
     }
   ]
 };
 
-// Your top 3 proficient stacks/tech experience
-
-const techStack = {
-  viewSkillBars: true,
-  experience: [
+// ---- Process Timeline (NEW) — how I work ----
+const processTimeline = {
+  display: true,
+  title: "How I work",
+  subtitle: "A predictable, low-risk path from idea to launch",
+  steps: [
     {
-      Stack: "Shopify Theme Development",
-      progressPercentage: "95%"
+      icon: "fas fa-search",
+      label: "Discovery",
+      desc: "Understand goals, audience, constraints, success metrics."
     },
     {
-      Stack: "Liquid Custom Coding",
-      progressPercentage: "90%"
+      icon: "fas fa-drafting-compass",
+      label: "Architecture",
+      desc: "Scope features, model data, pick the right stack, agree on shape."
     },
     {
-      Stack: "Shopify App Development (Private Apps)",
-      progressPercentage: "85%"
+      icon: "fas fa-bolt",
+      label: "Build",
+      desc: "Ship in small reviewable slices — sections, blocks, endpoints, screens."
     },
     {
-      Stack: "Store Speed Optimization",
-      progressPercentage: "88%"
+      icon: "fas fa-vial",
+      label: "QA",
+      desc: "Lighthouse, accessibility, cross-browser, real-device, edge cases."
     },
     {
-      Stack: "API Integrations & Custom Features",
-      progressPercentage: "80%"
+      icon: "fas fa-rocket",
+      label: "Launch",
+      desc: "Production deploy, smoke tests, monitoring hooks, rollback plan."
+    },
+    {
+      icon: "fas fa-handshake",
+      label: "Handover",
+      desc: "Docs, walk-through video, post-launch support window."
     }
-  ],
-  displayCodersrank: false
+  ]
 };
 
-// Work experience section
-
+// ---- Work experience (clients) ----
 const workExperiences = {
-  display: true, // Set it to true to show workExperiences Section
+  display: true,
   experience: [
     {
-      role: "Shopify Developer (Enterprise Project)",
+      role: "Shopify Full Stack Developer — Dawn Custom Pages",
       company: "Fashionphile",
       companylogo: require("./assets/images/fahionphile.png"),
-      date: "2024",
-      desc: "Worked on Shopify development for a global fashion resale brand operating across 40+ stores worldwide.",
+      date: "Dec 2025 – Feb 2026",
+      desc: "Dynamic page development on Dawn for a global fashion resale brand with 40+ stores worldwide.",
       descBullets: [
-        "Built custom Shopify theme sections and scalable storefront components",
-        "Implemented advanced UI enhancements and performance improvements",
-        "Supported enterprise-level Shopify architecture and multi-store workflows"
+        "Built 12+ custom Dawn pages on Online Store 2.0 — reusable sections/blocks",
+        "Shipped \"Is This Authentic?\" interactive game in vanilla JS — event-driven, dynamic DOM",
+        "Implemented section-within-section rendering via Section Rendering API"
       ]
     },
-
     {
-      role: "Full Stack Shopify Developer (Multinational Brand)",
-      company: "Kiddospace",
+      role: "Shopify Full Stack Developer — International Brand",
+      company: "The Kiddospace",
       companylogo: require("./assets/images/kiddospace.png"),
-      date: "2023 – 2024",
-      desc: "Revamped Shopify storefront using Debutify theme customization, metafields, and conversion-focused enhancements.",
+      date: "Mar 2025 – Oct 2025",
+      desc: "Full storefront revamp for an international children's brand operating 42+ stores worldwide.",
       descBullets: [
-        "Developed metafield-powered dynamic sections for product discovery",
-        "Implemented upsell/cross-sell integrations and optimized store performance",
-        "Implemented product page functionality using metafields, enabling dynamic image updates based on the selected color variant."
+        "Built dynamic sections powered by metafields and metaobjects",
+        "Translated Figma into pixel-perfect Liquid sections; advanced filtering",
+        "Lifted AOV via ReConvert / AfterSell; cut load times with lazy loading & WebP"
       ]
     },
-
     {
-      role: "Shopify Theme & Custom Features Developer",
-      company: "ValleyEyeWear",
-      companylogo: require("./assets/images/valleyeyewear.png"),
-      date: "2023",
-      desc: "Delivered advanced Shopify custom development including mega menus, metafield bundles, and third-party tool integrations.",
-      descBullets: [
-        "Created a pixel-perfect header and hover-based mega menu structure",
-        "Built custom product flow with lens bundle selection and dynamic pricing",
-        "Integrated virtual try-on functionality seamlessly into the storefront"
-      ]
-    },
-
-    {
-      role: "Shopify Store Developer (International Brand)",
+      role: "Shopify Full Stack Developer — Dawn From Scratch",
       company: "Scrubser",
       companylogo: require("./assets/images/scrubser.png"),
-      date: "2023",
-      desc: "Implemented and customized Shopify Dawn theme, building a scalable storefront with optimized navigation and conversion-focused sections.",
+      date: "Mar 2024 – Dec 2024",
+      desc: "Built the Dawn-based storefront from scratch — branding, layout, navigation, and core architecture.",
       descBullets: [
-        "Customized homepage sections, promotional blocks, and branded UI using Shopify native architecture",
-        "Configured product options, filtering, and Quick Buy functionality for smoother shopping experience",
-        "Developed a clean store structure with minimal reliance on heavy third-party apps"
+        "Multi-level brand-based navigation + dynamic homepage sections",
+        "Shopify-native filtering / facets; minimal third-party app dependency",
+        "Clean modular section architecture with metafield-driven content blocks"
       ]
     },
-
     {
-      role: "Shopify Theme Customization Developer",
-      company: "Ammara Khan",
-      companylogo: require("./assets/images/ammarakhan.png"),
-      date: "2022 – 2023",
-      desc: "Customized and configured a premium Shopify fashion theme with structured product metafields, navigation enhancements, and responsive UI refinements.",
+      role: "Shopify Full Stack Developer — Custom Product Page Engineering",
+      company: "Valley Eyewear",
+      companylogo: require("./assets/images/valleyeyewear.png"),
+      date: "Freelance",
+      desc: "Advanced Shopify development — custom mega menu, metafield-driven bundles, and third-party tool integration.",
       descBullets: [
-        "Built homepage banners, featured collections, and promotional sections using Shopify Theme Customizer",
-        "Implemented metafield-driven product information blocks (fabric, sizing, delivery)",
-        "Integrated WhatsApp CTA, newsletter signup, and Shopify Search & Discovery filtering"
+        "Pixel-perfect header + hover-triggered mega menu across desktop/mobile",
+        "Custom product page with metafield lens bundles + dynamic pricing logic",
+        "Integrated third-party virtual try-on tool with seamless UI placement"
       ]
     },
-
     {
-      role: "Shopify Developer",
+      role: "Shopify Full Stack Developer",
       company: "Lumu.pk",
       companylogo: require("./assets/images/lumu.png"),
       date: "2022 – 2023",
-      desc: "Designed and customized a modern Shopify store with responsive UI, branded sections, and performance improvements.",
+      desc: "Built a modern Shopify storefront with dynamic sections, branded UI, and performance-optimized architecture.",
       descBullets: [
-        "Built custom homepage sections and collection layouts",
+        "Custom homepage sections and collection layouts with reusable blocks",
         "Improved store speed, UX, and mobile-first responsiveness",
         "Configured product structure, navigation, and marketing integrations"
       ]
@@ -291,45 +314,51 @@ const workExperiences = {
   ]
 };
 
-/* Your Open Source Section to View Your Github Pinned Projects
-To know how to get github key look at readme.md */
-
+// ---- Open Source (GitHub pinned) — hidden until repos pinned ----
 const openSource = {
-  showGithubProfile: true, // Set true or false to show Contact profile using Github, defaults to true
-  display: true // Set false to hide this section, defaults to true
+  showGithubProfile: false,
+  display: false
 };
 
-// Some big projects you have worked on
-
+// ---- Big Projects (Custom Shopify Apps) ----
 const bigProjects = {
-  title: "Shopify Apps Projects",
-  subtitle: "SHOPIFY APPS THAT I HAVE BUILT TO HELP STORE OWNERS BOOST SALES",
+  title: "Custom Shopify Apps",
+  subtitle:
+    "PRIVATE APPS SHIPPED TO LIVE CLIENT STORES — CODE CONFIDENTIAL UNDER CLIENT AGREEMENTS",
   projects: [
     {
-      image: require("./assets/images/low-stock.png"),
-      projectName: "Low Stock Inventory Tracker (Private App)",
+      image: require("./assets/images/cartsense-app.png"),
+      projectName: "CartSense — Cart Abandonment Insight",
       projectDesc:
-        "A Shopify app that automatically tracks low stock products and notifies store owners to restock before running out of inventory (code confidential).",
+        "Injects a lightweight feedback prompt into the cart and surfaces structured drop-off reasons (price, shipping, payment) in an embedded Admin dashboard. Built on Remix, Polaris, App Bridge, Admin GraphQL API, and a theme app extension.",
       footerLink: [
         {
-          // name: "View App Details",
-          // url: "#"
+          name: "Request Demo",
+          url: "https://wa.me/923134503753?text=Hi%20Abdul%20Qadeer,%20I%20want%20a%20demo%20of%20CartSense%20App."
+        }
+      ]
+    },
+    {
+      image: require("./assets/images/low-stock.png"),
+      projectName: "Low Stock Inventory Tracker",
+      projectDesc:
+        "Background watcher on inventory_levels/update webhooks across the whole catalog. Pings the merchant the moment a SKU dips below a configurable threshold. Built on Node.js + Remix with embedded Polaris UI.",
+      footerLink: [
+        {
           name: "Request Demo",
           url: "https://wa.me/923134503753?text=Hi,%20I%20would%20like%20a%20demo%20of%20your%20Low%20Stock%20Inventory%20Tracker%20App."
         }
       ]
     },
     {
-      image: require("./assets/images/cartsense-app.png"),
-      projectName: "CartSense App (Private App)",
+      image: require("./assets/images/shopify-app-dev.png"),
+      projectName: "CronPilot — Scheduled Store Automations",
       projectDesc:
-        "An abandoned cart feedback app that collects customer reviews and reasons for leaving products in the cart, helping merchants improve conversions (code confidential).",
+        "Cron-job runner built natively for Shopify. Schedule recurring store operations — inventory syncs, scheduled publishing, metafield refreshes, draft order creation — from a single Admin dashboard. Replaces brittle Zapier setups.",
       footerLink: [
         {
-          // name: "View App Details",
-          // url: "#"
           name: "Request Demo",
-          url: "https://wa.me/923134503753?text=Hi%20Abdul%20Qadeer,%20I%20want%20a%20demo%20of%20CartSense%20App."
+          url: "https://wa.me/923134503753?text=Hi%20Abdul%20Qadeer,%20I%20want%20a%20demo%20of%20CronPilot%20App."
         }
       ]
     }
@@ -337,86 +366,30 @@ const bigProjects = {
   display: true
 };
 
-// Achievement Section
-// Include certificates, talks etc
-
-// const achievementSection = {
-//   title: emoji("Achievements And Certifications 🏆 "),
-//   subtitle:
-//     "Achievements, Certifications, Award Letters and Some Cool Stuff that I have done !",
-
-//   achievementsCards: [
-//     {
-//       title: "Google Code-In Finalist",
-//       subtitle:
-//         "First Pakistani to be selected as Google Code-in Finalist from 4000 students from 77 different countries.",
-//       image: require("./assets/images/codeInLogo.webp"),
-//       imageAlt: "Google Code-In Logo",
-//       footerLink: [
-//         {
-//           name: "Certification",
-//           url: "https://drive.google.com/file/d/0B7kazrtMwm5dYkVvNjdNWjNybWJrbndFSHpNY2NFV1p4YmU0/view?usp=sharing"
-//         },
-//         {
-//           name: "Award Letter",
-//           url: "https://drive.google.com/file/d/0B7kazrtMwm5dekxBTW5hQkg2WXUyR3QzQmR0VERiLXlGRVdF/view?usp=sharing"
-//         },
-//         {
-//           name: "Google Code-in Blog",
-//           url: "https://opensource.googleblog.com/2019/01/google-code-in-2018-winners.html"
-//         }
-//       ]
-//     },
-//     {
-//       title: "Google Assistant Action",
-//       subtitle:
-//         "Developed a Google Assistant Action JavaScript Guru that is available on 2 Billion devices world wide.",
-//       image: require("./assets/images/googleAssistantLogo.webp"),
-//       imageAlt: "Google Assistant Action Logo",
-//       footerLink: [
-//         {
-//           name: "View Google Assistant Action",
-//           url: "https://assistant.google.com/services/a/uid/000000100ee688ee?hl=en"
-//         }
-//       ]
-//     },
-
-//     {
-//       title: "PWA Web App Developer",
-//       subtitle: "Completed Certifcation from SMIT for PWA Web App Development",
-//       image: require("./assets/images/pwaLogo.webp"),
-//       imageAlt: "PWA Logo",
-//       footerLink: [
-//         {name: "Certification", url: ""},
-//         {
-//           name: "Final Project",
-//           url: "https://pakistan-olx-1.firebaseapp.com/"
-//         }
-//       ]
-//     }
-//   ],
-//   display: true // Set false to hide this section, defaults to true
-// };
-
+// ---- Achievements / Skills cards ----
 const achievementSection = {
-  title: "Shopify Skills & Expertise",
-  subtitle: "TECHNOLOGIES AND SKILLS I USE TO BUILD SHOPIFY STORES AND APPS",
+  title: "Core Shopify Expertise",
+  subtitle:
+    "THE STACK I USE EVERY DAY TO SHIP DYNAMIC SHOPIFY STORES, APPS, AND PLUS-TIER FEATURES",
   achievementsCards: [
     {
-      title: "Shopify Theme Development",
-      subtitle: "Liquid, JSON templates, custom sections, Shopify OS 2.0",
+      title: "Dynamic Theme Development",
+      subtitle:
+        "Liquid · Online Store 2.0 · Dawn · Horizon · Web Components · metafields / metaobjects",
       image: require("./assets/images/shopify-theme-dev.png"),
       footerLink: []
     },
     {
-      title: "Shopify App Development",
-      subtitle: "Remix, Node.js, Polaris, GraphQL Admin API",
+      title: "Custom App Development",
+      subtitle:
+        "Remix · Polaris · App Bridge · Admin GraphQL API · OAuth · Webhooks · Shopify Functions",
       image: require("./assets/images/shopify-app-dev.png"),
       footerLink: []
     },
     {
-      title: "Store Optimization",
-      subtitle: "Speed improvements, SEO basics, conversion-focused UX",
+      title: "Performance & Checkout Extensibility",
+      subtitle:
+        "Lighthouse audits · lazy loading · WebP · Checkout UI Extensions · Branding API (Plus)",
       image: require("./assets/images/store-opt.png"),
       footerLink: []
     }
@@ -424,103 +397,147 @@ const achievementSection = {
   display: true
 };
 
-// Blogs Section
-
+// ---- Blogs (hidden until written) ----
 const blogSection = {
   title: "Blogs",
-  subtitle:
-    "With Love for Developing cool stuff, I love to write and teach others what I have learnt.",
-  displayMediumBlogs: "true", // Set true to display fetched medium blogs instead of hardcoded ones
-  blogs: [
+  subtitle: "",
+  displayMediumBlogs: "false",
+  blogs: [],
+  display: false
+};
+
+// ---- Services grid (NEW) — 6 cards showcasing full stack range ----
+const servicesGrid = {
+  display: true,
+  title: "Services",
+  subtitle: "What I can build for you — end-to-end engineering, not just patches.",
+  services: [
     {
-      url: "https://blog.usejournal.com/create-a-google-assistant-action-and-win-a-google-t-shirt-and-cloud-credits-4a8d86d76eae",
-      title: "Win a Google Assistant Tshirt and $200 in Google Cloud Credits",
-      description:
-        "Do you want to win $200 and Google Assistant Tshirt by creating a Google Assistant Action in less then 30 min?"
+      icon: "fab fa-shopify",
+      title: "Shopify Plus Theme Development",
+      desc: "Dynamic sections, blocks, metafields/metaobjects on Dawn or Horizon. Pixel-perfect Figma-to-Liquid with merchant-editable architecture."
     },
     {
-      url: "https://medium.com/@saadpasta/why-react-is-the-best-5a97563f423e",
-      title: "Why REACT is The Best?",
-      description:
-        "React is a JavaScript library for building User Interface. It is maintained by Facebook and a community of individual developers and companies."
-    }
-  ],
-  display: false // Set false to hide this section, defaults to true
-};
-
-// Talks Sections
-
-const talkSection = {
-  title: "SERVICES",
-  subtitle: emoji(
-    "I HELP SHOPIFY STORE OWNERS BUILD, CUSTOMIZE, AND OPTIMIZE THEIR STORES 🚀"
-  ),
-
-  talks: [
+      icon: "fas fa-cube",
+      title: "Custom Shopify App Development",
+      desc: "Embedded private apps on Remix + Polaris + App Bridge with Admin GraphQL API, OAuth, and webhooks. Three apps shipped to live stores."
+    },
     {
-      title: "Shopify Development Services",
-      subtitle:
-        "I build custom Shopify themes, private apps, and optimize stores.",
-      slides_url: "#contact",
-      event_url: "#projects"
+      icon: "fas fa-code-branch",
+      title: "Shopify Functions & Checkout Extensibility",
+      desc: "TypeScript Shopify Functions (discount, cart-transform, delivery), Checkout UI extensions, and Branding API customizations on Plus."
+    },
+    {
+      icon: "fas fa-layer-group",
+      title: "Full Stack Web Development",
+      desc: "Production React / Next.js frontends backed by Node.js + GraphQL/REST APIs. Auth, payments, dashboards, real-time features — deployed to Vercel."
+    },
+    {
+      icon: "fas fa-plug",
+      title: "API Design & Integrations",
+      desc: "REST and GraphQL API design, third-party integrations, webhook handlers, ERP / CRM sync, payment gateway wiring."
+    },
+    {
+      icon: "fas fa-tachometer-alt",
+      title: "Performance Optimization",
+      desc: "Lighthouse audits, lazy loading, WebP/AVIF, code splitting, render profiling — measurable Core Web Vitals improvements."
     }
-  ],
-  display: true // Set false to hide this section, defaults to true
+  ]
 };
 
-// Podcast Section
+// ---- Talks (kept for legacy template compatibility, hidden) ----
+const talkSection = {
+  title: "",
+  subtitle: "",
+  talks: [],
+  display: false
+};
 
+// ---- Podcast (hidden) ----
 const podcastSection = {
-  title: emoji("Podcast 🎙️"),
-  subtitle: "I LOVE TO TALK ABOUT MYSELF AND TECHNOLOGY",
-
-  // Please Provide with Your Podcast embeded Link
-  podcast: [
-    "https://anchor.fm/codevcast/embed/episodes/DevStory---Saad-Pasta-from-Karachi--Pakistan-e9givv/a-a15itvo"
-  ],
-  display: false // Set false to hide this section, defaults to true
+  title: "Podcast",
+  subtitle: "",
+  podcast: [],
+  display: false
 };
 
-// Resume Section
+// ---- FAQ (NEW) ----
+const faqSection = {
+  display: true,
+  title: "Common questions",
+  subtitle: "Quick answers to what most clients ask before we kick off.",
+  items: [
+    {
+      q: "What's your typical turnaround time?",
+      a: "A custom theme section usually lands in 3–5 business days. A small private Shopify app or Function takes 1–3 weeks depending on scope. I scope realistically up-front and give a fixed delivery date."
+    },
+    {
+      q: "Do you work hourly or fixed-price?",
+      a: "Both. For well-defined work I prefer fixed-price with clear deliverables. For exploratory R&D, audits, or open-ended retainer work, hourly makes sense. We pick the model that fits the work."
+    },
+    {
+      q: "Who owns the code?",
+      a: "You do. On project sign-off you receive the full source, a clean Git history, and a walkthrough document. No vendor lock-in, no hidden licensing."
+    },
+    {
+      q: "Will you sign an NDA?",
+      a: "Yes, gladly. I've shipped three private Shopify apps to live stores under NDA. Mutual NDA before scoping is normal in my workflow."
+    },
+    {
+      q: "How do we communicate during the project?",
+      a: "Async-first: Slack / WhatsApp / email for daily updates, plus a shared task board (Linear / Notion / Trello — your choice). One short weekly sync call. I post end-of-day progress every working day."
+    },
+    {
+      q: "Do you offer post-launch support?",
+      a: "Yes. Every project includes a 14-day post-launch support window for bug-fixes and tweaks at no extra cost. After that, a flexible retainer is available if you want me on standby."
+    }
+  ]
+};
+
+// ---- Resume ----
 const resumeSection = {
   title: "Resume",
   subtitle: "Feel free to download my resume",
-
-  // Please Provide with Your Podcast embeded Link
-  display: true // Set false to hide this section, defaults to true
+  display: true
 };
 
+// ---- Contact ----
 const contactInfo = {
-  title: emoji("Contact Me ☎️"),
+  title: emoji("Let's Build Something Great Together 🚀"),
   subtitle:
-    "Discuss a project or just want to say hi? My Inbox is open for all.",
+    "Have a Shopify project in mind, or just want to say hi? My inbox is open.",
   number: "+92-313-4503753",
   email_address: "mr.developer38@gmail.com"
 };
 
-// Twitter Section
-
+// ---- Twitter (hidden) ----
 const twitterDetails = {
-  userName: "twitter", //Replace "twitter" with your twitter username without @
-  display: true // Set true to display this section, defaults to false
+  userName: "",
+  display: false
 };
 
-const isHireable = true; // Set false if you are not looking for a job. Also isHireable will be display as Open for opportunities: Yes/No in the GitHub footer
+const isHireable = true;
 
 export {
   illustration,
   greeting,
   socialMediaLinks,
+  statsStrip,
+  clientLogosMarquee,
   splashScreen,
   skillsSection,
   educationInfo,
   techStack,
+  techStackGrid,
+  processTimeline,
   workExperiences,
   openSource,
   bigProjects,
   achievementSection,
   blogSection,
   talkSection,
+  servicesGrid,
+  faqSection,
   podcastSection,
   contactInfo,
   twitterDetails,

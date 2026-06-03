@@ -1,28 +1,55 @@
 @import "../../_globalColor";
 
-.main {
-  width: 90%;
-  padding: 20px 10px;
-  margin: 0px auto;
-  margin-top: 4rem;
-}
+/* ===========================
+   Hero container — wraps decorative background
+   =========================== */
 .greet-main {
+  position: relative;
   width: 90%;
-  padding: 20px 10px;
-  margin: 0px auto;
-  margin-top: 2rem;
+  max-width: 1200px;
+  padding: 60px 10px 40px;
+  margin: 2rem auto 0;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+/* Subtle emerald orb in the corner */
+.hero-bg-orb {
+  position: absolute;
+  top: -120px;
+  right: -100px;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, rgba(16, 185, 129, 0.02) 60%, transparent 80%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.greet-main.dark .hero-bg-orb {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(16, 185, 129, 0.04) 60%, transparent 80%);
+}
+
+/* Faint grain texture for premium feel */
+.hero-bg-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .greeting-main {
+  position: relative;
+  z-index: 1;
   display: flex;
+  align-items: center;
+  gap: 3rem;
 }
 
 .subTitle {
   color: $subTitle !important;
-}
-
-.greeting-main {
-  display: flex;
 }
 
 .greeting-main > * {
@@ -30,32 +57,99 @@
   margin-bottom: 30px;
 }
 
+.greeting-text-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.greeting-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin-bottom: 1.25rem;
+}
+
+.greeting-tagline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: $brandPrimary;
+  margin: 0 0 0.875rem;
+}
+
+.greeting-tagline.dark {
+  color: $brandPrimary;
+}
+
+.greeting-tech-row {
+  display: flex;
+  gap: 1.25rem;
+  margin: 1.5rem 0 0.5rem;
+  font-size: 1.4rem;
+  color: $subTitle;
+
+  span {
+    transition: color 0.2s ease, transform 0.2s ease;
+    cursor: default;
+
+    &:hover {
+      color: $brandPrimary;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.dark-mode .greeting-tech-row {
+  color: rgba(248, 250, 252, 0.55);
+}
+
 .empty-div {
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 .button-greeting-div {
   display: flex;
-  margin-top: 40px;
+  gap: 1rem;
+  margin-top: 32px;
 }
+
 .download-link-button {
   text-decoration: none;
 }
 
 .greeting-text {
-  font-size: 70px;
-  line-height: 1.1;
-  color: $textColor !important;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 64px;
+  line-height: 1.05;
+  color: $titleColor !important;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.25rem;
+}
+
+.dark-mode.greeting-text {
+  color: $textColorDark !important;
 }
 
 .greeting-text-p {
-  font-size: 30px;
-  line-height: 40px;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0;
+  color: $subTitle;
 }
 
-.greeting-image-div > img {
-  max-width: 100%;
-  height: auto;
+.dark-mode.greeting-text-p {
+  color: rgba(248, 250, 252, 0.8) !important;
+}
+
+.greeting-image-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .wave-emoji {
@@ -67,56 +161,185 @@
 }
 
 @keyframes wave {
-  0% {
-    transform: rotate(0deg);
-  }
-  10% {
-    transform: rotate(-10deg);
-  }
-  20% {
-    transform: rotate(12deg);
-  }
-  30% {
-    transform: rotate(-10deg);
-  }
-  40% {
-    transform: rotate(9deg);
-  }
-  50% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(0deg);
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(-10deg); }
+  20% { transform: rotate(12deg); }
+  30% { transform: rotate(-10deg); }
+  40% { transform: rotate(9deg); }
+  50% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ===========================
+   Hero Code Card — premium full stack visual
+   =========================== */
+.code-card {
+  width: 100%;
+  max-width: 560px;
+  background: #0b1220;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  box-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.04) inset,
+    0 28px 60px rgba(15, 23, 42, 0.28),
+    0 8px 20px rgba(16, 185, 129, 0.12);
+  overflow: hidden;
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, Menlo, Consolas, monospace;
+  animation: code-float 8s ease-in-out infinite;
+}
+
+.code-card.dark {
+  box-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.04) inset,
+    0 28px 60px rgba(0, 0, 0, 0.5),
+    0 8px 20px rgba(16, 185, 129, 0.18);
+}
+
+@keyframes code-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.code-card-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 14px;
+  background: linear-gradient(180deg, #161e2e 0%, #11192a 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #ff5f57; }
+.dot-yellow { background: #febc2e; }
+.dot-green { background: #28c840; }
+
+.code-card-filename {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: rgba(248, 250, 252, 0.55);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+}
+
+.code-card-body {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  margin: 0;
+  padding: 18px 18px 18px 0;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: #e2e8f0;
+  background: linear-gradient(180deg, #0b1220 0%, #0a111d 100%);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.code-card-body .ln {
+  text-align: right;
+  padding-right: 12px;
+  color: rgba(148, 163, 184, 0.45);
+  user-select: none;
+}
+
+.code-card-body .kw { color: #f472b6; }     /* keyword pink */
+.code-card-body .fn { color: #60a5fa; }     /* function blue */
+.code-card-body .id { color: #e2e8f0; }     /* identifier */
+.code-card-body .ty { color: #34d399; }     /* type emerald */
+.code-card-body .str { color: #fde68a; }    /* string amber */
+.code-card-body .num { color: #fb923c; }    /* number orange */
+
+.code-card-footer {
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, #0a111d 0%, #0b1220 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.code-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+
+  &.muted {
+    background: rgba(148, 163, 184, 0.1);
+    color: #94a3b8;
+    border-color: rgba(148, 163, 184, 0.18);
   }
 }
 
-/* Media Query */
+/* ===========================
+   Responsive
+   =========================== */
 @media (max-width: 1380px) {
   .greeting-text {
     font-size: 50px;
   }
   .greeting-text-p {
-    font-size: 20px;
+    font-size: 1rem;
   }
 }
-@media (max-width: 768px) {
+
+@media (max-width: 992px) {
+  .greeting-main {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .greeting-text-div {
+    text-align: center;
+    align-items: center;
+  }
+  .greeting-badges {
+    justify-content: center;
+  }
+  .greeting-tech-row {
+    justify-content: center;
+  }
   .button-greeting-div {
-    justify-content: space-around;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   .greeting-text {
-    font-size: 30px;
-    text-align: center;
+    font-size: 42px;
   }
   .greeting-text-p {
-    font-size: 16px;
-    line-height: normal;
+    font-size: 1rem;
     text-align: center;
   }
-  .greeting-main {
-    display: block;
+}
+
+@media (max-width: 560px) {
+  .greet-main {
+    padding: 32px 8px 24px;
   }
-  .greeting-image-div {
-    height: 256px;
+  .greeting-text {
+    font-size: 32px;
+  }
+  .code-card {
+    max-width: 100%;
+  }
+  .code-card-body {
+    font-size: 11px;
+    grid-template-columns: 28px 1fr;
+    padding: 14px 12px 14px 0;
   }
 }
 

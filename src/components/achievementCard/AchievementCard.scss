@@ -1,78 +1,140 @@
 @import "../../_globalColor";
 
+/* ===========================
+   Achievement / Expertise cards — responsive
+   =========================== */
+
+.certificate-card {
+  background: $lightBackground2;
+  padding: 1.25rem;
+  border-radius: 16px;
+  border: 1px solid $lightBorder1;
+  box-shadow: 0 1px 2px $lightBoxShadow;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px $lightBoxShadowDark;
+    border-color: rgba(16, 185, 129, 0.4);
+  }
+}
+
+.dark-mode.certificate-card {
+  background: $darkBackgroundElevated;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+
+  &:hover {
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    border-color: rgba(16, 185, 129, 0.45);
+  }
+}
+
+.certificate-image-div {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $brandSubtle;
+}
+
+.dark-mode .certificate-image-div {
+  background: rgba(255, 255, 255, 0.03);
+}
+
 .card-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+}
+
+.certificate-detail-div {
+  text-align: left;
+  padding: 0 0.25rem;
 }
 
 .card-title {
+  font-family: 'Space Grotesk', sans-serif;
   color: $titleColor;
-  font-size: 1.375rem;
-  line-height: 24px;
+  font-size: 1.2rem;
+  line-height: 1.35;
   font-weight: 700;
-  margin: 15px 0 0 0;
+  margin: 1.1rem 0 0.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  letter-spacing: -0.01em;
 }
+
+.dark-mode.card-title {
+  color: $textColorDark;
+}
+
 .card-subtitle {
   color: $cardSubtitle;
-  font-size: 1.063rem;
-  line-height: 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin: 0;
 }
-.certificate-card {
-  background-color: $lightBackground2;
-  box-shadow: $lightBoxShadowDark 0px 10px 30px -15px;
-  padding: 1.5rem;
-  border-radius: 10px;
-  border: 1px solid $lightBorder1;
-  -webkit-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+
+.dark-mode.card-subtitle {
+  color: rgba(248, 250, 252, 0.7);
 }
-.certificate-detail-div {
-  text-align: center;
-}
-.certificate-card:hover {
-  box-shadow: $lightBoxShadowDark 0px 20px 30px -10px;
-}
-.dark-mode.certificate-card:hover {
-  box-shadow: $achievementCertificateCardHoverDark 0px 20px 30px -10px;
-}
-.certificate-image-div {
-  position: relative;
-  height: 250px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 .achievement-cards-div {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
 }
+
 .certificate-card-footer {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
-  justify-content: center;
+  margin-top: 0.75rem;
 }
+
 .certificate-card-footer span.certificate-tag {
-  background: $buttonColor;
-  color: $lightBackground3;
-  vertical-align: middle;
-  align-items: center;
-  border-radius: 4px;
+  background: $brandPrimary;
+  color: #fff;
+  border-radius: 8px;
   display: inline-flex;
-  font-size: 0.75rem;
-  height: 2em;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  height: 2.25em;
+  align-items: center;
   justify-content: center;
   white-space: nowrap;
   line-height: 1.5;
   margin: 0 0.5rem 0.5rem 0;
-  padding: 0 0.75em;
+  padding: 0 0.875em;
   cursor: pointer;
-  transition: 0.2s ease-in;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: $brandPrimaryDark;
+    transform: translateY(-1px);
+  }
 }
-span.certificate-tag:hover {
-  background: $buttonHover;
+
+@media (max-width: 768px) {
+  .achievement-cards-div {
+    grid-template-columns: 1fr;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+
+  .card-subtitle {
+    font-size: 0.875rem;
+  }
 }

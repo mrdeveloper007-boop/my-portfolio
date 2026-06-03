@@ -1,5 +1,39 @@
 @import "./globalColor";
 
+/* ============================================
+   Global premium typography
+   ============================================ */
+
+html, body, #root {
+  font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  color: $textColor;
+  background: $lightBackground1;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', 'Manrope', system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: $titleColor;
+}
+
+a {
+  color: $brandPrimary;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $brandPrimaryDark;
+  }
+}
+
 .App {
   text-align: center;
   width: 100%;
@@ -27,4 +61,140 @@
 
 .subTitle {
   color: $subTitle;
+}
+
+.dark-mode {
+  background: $darkBackground;
+  color: $textColorDark;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: $textColorDark;
+  }
+}
+
+section, .main {
+  scroll-margin-top: 90px;
+}
+
+/* ============================================
+   UNIFIED SECTION CONTAINER WIDTH
+   All sections — including legacy template sections —
+   are constrained to the same 1200px max-width so the
+   layout reads as one consistent column on big screens.
+   ============================================ */
+.main,
+.experience-container,
+.education-section,
+.skillProgress-container,
+.contact-margin {
+  width: 90% !important;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  box-sizing: border-box;
+}
+
+/* Consistent vertical rhythm between sections */
+.main,
+.experience-container,
+.education-section {
+  margin-top: 4rem !important;
+  margin-bottom: 0 !important;
+}
+
+/* ============================================
+   UNIFIED SECTION HEADINGS
+   Template's legacy heading classes were 56px / weight 400.
+   Force them all to match our modern editorial heading style.
+   ============================================ */
+.skills-heading,
+.experience-heading,
+.achievement-heading,
+.education-heading {
+  font-family: 'Space Grotesk', 'Manrope', sans-serif !important;
+  font-size: 2.5rem !important;
+  font-weight: 700 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.03em !important;
+  color: $titleColor !important;
+  margin: 0 0 1.5rem 0 !important;
+  text-align: left;
+}
+
+.dark-mode .skills-heading,
+.dark-mode .experience-heading,
+.dark-mode .achievement-heading,
+.dark-mode .education-heading {
+  color: $textColorDark !important;
+}
+
+@media (max-width: 768px) {
+  .skills-heading,
+  .experience-heading,
+  .achievement-heading,
+  .education-heading {
+    font-size: 1.85rem !important;
+    text-align: center !important;
+  }
+}
+
+/* ============================================
+   Reusable utility classes
+   ============================================ */
+.lift-on-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px $lightBoxShadowDark;
+  }
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 999px;
+  background: $brandPrimaryLight;
+  color: $brandPrimaryDark;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+
+  &::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $brandPrimary;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+    animation: pulse 2s infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2); }
+  50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+}
+
+.location-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 999px;
+  background: $brandSubtle;
+  color: $subTitle;
+  border: 1px solid $lightBorder1;
+}
+
+.dark-mode .location-chip {
+  background: rgba(255, 255, 255, 0.06);
+  color: $textColorDark;
+  border-color: rgba(255, 255, 255, 0.1);
 }

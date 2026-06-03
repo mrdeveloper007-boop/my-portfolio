@@ -1,15 +1,85 @@
 @import "../../_globalColor";
 
-.footer-text {
-  text-align: center;
-  color: $subTitle !important;
-}
-
-.dark-mode {
-  color: $textColorDark !important;
-}
-
 .footer-div {
-  margin-top: 2rem;
-  padding-bottom: 1rem;
+  margin-top: 4rem;
+  padding: 3rem 1rem 2rem;
+  border-top: 1px solid $lightBorder1;
+}
+
+.footer-div.dark {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, $brandPrimary 0%, $brandPrimaryDark 100%);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -1px;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+}
+
+.footer-brand-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+  strong {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    color: $titleColor;
+  }
+
+  span {
+    font-size: 13px;
+    color: $subTitle;
+  }
+}
+
+.footer-div.dark .footer-brand-text strong {
+  color: $textColorDark;
+}
+
+.footer-meta {
+  font-size: 13px;
+  color: $subTitle;
+  margin: 0;
+}
+
+.footer-div.dark .footer-meta {
+  color: rgba(248, 250, 252, 0.6);
+}
+
+@media (max-width: 640px) {
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-meta {
+    text-align: center;
+  }
 }
