@@ -24,7 +24,7 @@ import {
    ================================================================== */
 
 // Reveal-on-scroll — adds `is-in` to the element when it enters viewport.
-function useReveal(options = {}) {
+function useReveal() {
   const ref = useRef(null);
   useEffect(() => {
     const node = ref.current;
@@ -36,7 +36,7 @@ function useReveal(options = {}) {
           io.disconnect();
         }
       },
-      {threshold: 0.12, rootMargin: "0px 0px -60px 0px", ...options}
+      {threshold: 0.12, rootMargin: "0px 0px -60px 0px"}
     );
     io.observe(node);
     return () => io.disconnect();
