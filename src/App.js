@@ -269,8 +269,7 @@ function Hero() {
           </a>
           <a
             href={profile.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            download={profile.resumeFilename}
             className="aq-btn aq-btn-ghost"
           >
             <i className="fas fa-file-download" />

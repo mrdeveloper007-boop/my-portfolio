@@ -25,8 +25,8 @@ export const profile = {
   whatsapp: "https://wa.me/923134503753",
   linkedin: "https://www.linkedin.com/in/qadeer-ghaffar-665430197/",
   github: "https://github.com/mrdeveloper007-boop",
-  resumeUrl:
-    "https://drive.google.com/uc?export=download&id=1UILznJ2ecVIazvRXywGsD6jPPfsMiAcm"
+  resumeUrl: "/Abdul-Qadeer-Shopify-Full-Stack-Developer.pdf",
+  resumeFilename: "Abdul-Qadeer-Shopify-Full-Stack-Developer.pdf"
 };
 
 export const hero = {
